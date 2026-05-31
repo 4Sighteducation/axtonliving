@@ -196,17 +196,13 @@ body::after {
 }
 
 .brand-logo {
-  height: 88px;
+  height: 80px;
   width: auto;
   transition: height 0.4s var(--ease);
 }
 
-.site-header .brand-logo {
-  mix-blend-mode: multiply;
-}
-
 .site-header.scrolled .brand-logo {
-  height: 72px;
+  height: 64px;
 }
 
 .nav {
@@ -1042,8 +1038,7 @@ body::after {
 }
 
 .footer-inner .brand-logo {
-  height: 56px;
-  mix-blend-mode: normal;
+  height: 52px;
   filter: brightness(1.4);
 }
 
@@ -1105,11 +1100,11 @@ body::after {
   }
 
   .brand-logo {
-    height: 72px;
+    height: 68px;
   }
 
   .site-header.scrolled .brand-logo {
-    height: 64px;
+    height: 56px;
   }
 }
 
