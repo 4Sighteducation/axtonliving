@@ -5,8 +5,8 @@ interface Props {
 }
 
 const {
-  title = 'Axton Living | Property with purpose',
-  description = 'Axton Living brings a fresh, refined approach to property — stylish, personal, and built on trust.',
+  title = 'Axton Living — Property with Purpose',
+  description = 'Axton Living transforms overlooked properties into homes people want to live in. A considered, design-led approach to development — and a refreshingly different kind of partner for investors.',
 } = Astro.props;
 ---
 
@@ -16,7 +16,9 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/axton-logo.png" />
+    <link rel="icon" type="image/jpeg" href="/axton-logo.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>

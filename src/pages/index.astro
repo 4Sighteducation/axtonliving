@@ -1,156 +1,314 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import logoImg from '../assets/images/axton-logo.jpeg';
+import catherinePortrait from '../assets/images/catherine-portrait.jpeg';
+import catherineOffice from '../assets/images/catherine-office.jpeg';
 
-const services = [
+const projects = [
   {
-    title: 'Property management',
-    text: 'Thoughtful oversight of your home or portfolio — responsive, organised, and always personal.',
+    idx: '01',
+    title: 'The Garden House',
+    location: 'Cheshire',
+    type: 'Full renovation',
+    text: 'A dated three-bed reworked around light and flow — walls opened to the garden, a kitchen that became the heart of the home. Reimagined for how families actually live.',
+    tags: ['Structural reconfiguration', 'Interior design', 'Landscaping'],
+    variant: 'default',
   },
   {
-    title: 'Lettings & tenant care',
-    text: 'Finding the right people for the right spaces, with clear communication at every step.',
+    idx: '02',
+    title: 'The Old Terrace',
+    location: 'Manchester',
+    type: 'Period refurbishment',
+    text: 'Original features rescued and celebrated, paired with a calm, contemporary palette. Proof that character and modern comfort aren\'t a trade-off.',
+    tags: ['Heritage detailing', 'Loft conversion', 'Energy upgrade'],
+    variant: 'flip pink',
   },
   {
-    title: 'Portfolio guidance',
-    text: 'Strategic advice shaped around your goals, with an eye for long-term value and peace of mind.',
-  },
-  {
-    title: 'Concierge support',
-    text: 'From maintenance to move-ins — a calm, capable hand when you need it most.',
+    idx: '03',
+    title: 'The Coach House',
+    location: 'Cheshire',
+    type: 'Conversion',
+    text: 'An unloved outbuilding turned into a light-filled home, designed to feel considered in every corner — and to command its market when finished.',
+    tags: ['Change of use', 'Bespoke joinery', 'Turnkey finish'],
+    variant: 'default',
   },
 ];
 
-const values = [
-  'A fresh perspective in a traditional industry',
-  'Clear, honest communication — no jargon',
-  'Detail-led care with a human touch',
-  'Built for landlords, homeowners, and investors alike',
+const principles = [
+  {
+    num: '01',
+    title: 'Design-led, always',
+    text: 'We start with how a home should feel, not just what it should cost. Good design is what makes a property desirable — and desirable property sells and lets, faster.',
+  },
+  {
+    num: '02',
+    title: 'Considered, not cut-throat',
+    text: 'Calm, clear communication and relationships that last beyond a single deal. No bluster, no games — just dependable people doing careful work.',
+    delay: 'd1',
+  },
+  {
+    num: '03',
+    title: 'Detail as standard',
+    text: 'The things others skip are the things we obsess over. It\'s where lasting quality lives, and where real value quietly compounds.',
+    delay: 'd1',
+  },
+  {
+    num: '04',
+    title: 'Partnership over transaction',
+    text: 'Investors aren\'t a wallet to us. You get transparency, a shared plan, and a partner who treats your capital with the same care as the property.',
+    delay: 'd2',
+  },
 ];
+
+const investorPoints = [
+  'Sourcing with an eye for under-valued potential',
+  'Design and project delivery managed end-to-end',
+  'Clear reporting and honest, jargon-free numbers',
+  'Flexible structures — JV, funding, or full delivery',
+];
+
+const partnerSteps = [
+  { num: '1', title: 'Conversation', text: 'We learn your goals, appetite and timescales — no pressure, no pitch.' },
+  { num: '2', title: 'Opportunity', text: 'We bring you sourced projects with the numbers and the vision laid out plainly.' },
+  { num: '3', title: 'Transformation', text: 'We manage the work, the trades and the timeline. You see steady progress.' },
+  { num: '4', title: 'Return', text: 'Sale or let, your way — with a partner you\'ll want to work with again.' },
+];
+
+const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14462e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
 ---
 
 <Layout>
-  <header class="site-header">
+  <header class="site-header" id="header">
     <div class="container header-inner">
-      <a href="#" class="brand" aria-label="Axton Living home">
-        <img src="/axton-logo.png" alt="Axton Living" width="72" height="88" />
+      <a href="#top" class="brand" aria-label="Axton Living home">
+        <img src={logoImg.src} alt="Axton Living" class="brand-logo" width={logoImg.width} height={logoImg.height} fetchpriority="high" />
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#approach">Approach</a>
-        <a href="#contact" class="nav-cta">Get in touch</a>
+        <a class="link" href="#story">Story</a>
+        <a class="link" href="#projects">Projects</a>
+        <a class="link" href="#approach">Approach</a>
+        <a class="link" href="#investors">Invest</a>
+        <a class="nav-cta" href="#contact">Get in touch</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
       <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-blob b1" data-parallax="0.18" aria-hidden="true"></div>
+      <div class="hero-blob b2" data-parallax="-0.12" aria-hidden="true"></div>
       <div class="container hero-grid">
-        <div class="hero-copy animate-in">
-          <span class="section-label">Property with purpose</span>
-          <h1>Where homes are cared for with intention</h1>
-          <p class="hero-lead">
-            Axton Living offers a refined approach to property — modern, approachable,
-            and unmistakably personal. A feminine perspective in an industry that
-            rarely makes space for one.
+        <div class="hero-copy">
+          <span class="eyebrow fade-stagger d1">Property with purpose</span>
+          <h1>
+            <span class="reveal-line"><span>Beautiful homes</span></span>
+            <span class="reveal-line"><span>that quietly <em>outperform.</em></span></span>
+          </h1>
+          <p class="hero-lead fade-stagger d2">
+            Axton Living transforms overlooked properties into homes people genuinely
+            want to live in — design-led, considered, and refreshingly human. A
+            different kind of development partner for investors who care how value is made.
           </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Start a conversation</a>
-            <a href="#services" class="btn btn-secondary">Explore services</a>
+          <div class="hero-actions fade-stagger d3">
+            <a href="#investors" class="btn btn-primary">
+              Partner with us
+              <Fragment set:html={arrowIcon} />
+            </a>
+            <a href="#projects" class="btn btn-secondary">See the work</a>
           </div>
         </div>
-        <div class="hero-visual animate-in-delay">
-          <div class="hero-card">
-            <img src="/axton-logo.png" alt="" width="220" height="268" class="hero-logo" />
-            <p class="hero-card-tag">Est. 2026</p>
-            <p class="hero-card-text">
-              Stylish property services for people who value clarity, care, and confidence.
-            </p>
+        <div class="hero-visual">
+          <img src={logoImg.src} alt="" class="hero-mark" width={96} height={112} aria-hidden="true" />
+          <div class="hero-frame">
+            <img src={catherineOffice.src} alt="Catherine in a modern property development office" class="photo-fill" width={catherineOffice.width} height={catherineOffice.height} fetchpriority="high" />
+          </div>
+          <div class="hero-float">
+            <span class="num" data-count="11">0</span>
+            <span class="lbl">Homes brought back to life</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="about" class="about">
-      <div class="container about-grid">
-        <div>
-          <span class="section-label">About Axton Living</span>
-          <h2>A different kind of property business</h2>
+    <section class="story" id="story">
+      <div class="container story-grid">
+        <div class="story-visual">
+          <div class="frame">
+            <img src={catherinePortrait.src} alt="Catherine, founder of Axton Living" class="photo-fill" width={catherinePortrait.width} height={catherinePortrait.height} loading="lazy" />
+          </div>
+          <div class="frame two">
+            <img src={catherineOffice.src} alt="Property development workspace" class="photo-fill" width={catherineOffice.width} height={catherineOffice.height} loading="lazy" />
+          </div>
         </div>
-        <div class="about-copy">
-          <p>
-            Property is often presented as transactional and impersonal. Axton Living
-            was founded to change that — bringing warmth, precision, and a distinctly
-            modern sensibility to every client relationship.
+        <div class="story-text">
+          <span class="eyebrow" data-reveal>The story</span>
+          <h2 data-reveal class="d1">Before Axton Living<br />had a name.</h2>
+          <p class="lede" data-reveal>
+            There were the projects — homes bought tired and overlooked, then patiently
+            reimagined into places worth coming home to.
           </p>
-          <p>
-            Whether you own one home or a growing portfolio, you deserve a partner
-            who listens first, communicates clearly, and treats your property as if
-            it were their own.
+          <p data-reveal class="d1">
+            For years, Catherine renovated property the only way that felt right: slowly,
+            carefully, and with a designer's eye for the details most developers skip.
+            What began as personal projects became a quiet portfolio — and a reputation
+            for turning out homes that people fall for, and that hold their value.
+          </p>
+          <p data-reveal class="d2">
+            Axton Living is the next chapter: the same instinct, now offered as a
+            partnership. The craft of a personal project, with the structure of a business.
+          </p>
+          <p class="signature" data-reveal>
+            Catherine
+            <small>Founder, Axton Living</small>
           </p>
         </div>
       </div>
     </section>
 
-    <section id="services" class="services">
+    <section class="stats">
+      <div class="container stats-grid">
+        <div class="stat" data-reveal>
+          <div class="figure"><span data-count="11">0</span></div>
+          <div class="cap">Homes transformed</div>
+        </div>
+        <div class="stat d1" data-reveal>
+          <div class="figure"><span data-count="9">0</span><span class="suffix">yrs</span></div>
+          <div class="cap">Hands-on experience</div>
+        </div>
+        <div class="stat" data-reveal>
+          <div class="figure">£<span data-count="2.4" data-decimals="1">0</span><span class="suffix">m</span></div>
+          <div class="cap">Value created</div>
+        </div>
+        <div class="stat d1" data-reveal>
+          <div class="figure"><span data-count="28">0</span><span class="suffix">%</span></div>
+          <div class="cap">Avg. value uplift</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
       <div class="container">
         <div class="section-head">
-          <span class="section-label">What we offer</span>
-          <h2>Services designed around you</h2>
-          <p>
-            Flexible support for landlords, homeowners, and investors — delivered
-            with the same attention to detail throughout.
+          <span class="eyebrow" data-reveal>Selected work</span>
+          <h2 data-reveal class="d1">A portfolio with a point of view</h2>
+          <p data-reveal class="d2">
+            Every Axton project starts with the same question: how should it feel to
+            live here? These are a few of the homes that answer it.
           </p>
         </div>
-        <div class="service-grid">
-          {services.map((service, index) => (
-            <article class="service-card" style={`--delay: ${index * 0.08}s`}>
-              <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-            </article>
+
+        {projects.map((project) => (
+          <article class={`project${project.variant.includes('flip') ? ' flip' : ''}`}>
+            <div class="project-media">
+              <div class={`ph clip${project.variant.includes('pink') ? ' pink' : ''}`}>
+                <div class="ph-mark">
+                  <img src={logoImg.src} alt="" aria-hidden="true" loading="lazy" />
+                </div>
+                <div class="ph-label">Before &amp; after gallery</div>
+              </div>
+            </div>
+            <div class="project-body">
+              <span class="idx" data-reveal>{project.idx}</span>
+              <h3 data-reveal class="d1">{project.title}</h3>
+              <div class="loc d1" data-reveal><b>{project.location}</b> · {project.type}</div>
+              <p data-reveal class="d2">{project.text}</p>
+              <div class="tags d2" data-reveal>
+                {project.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Considered</span><span>Design-led</span><span>Detail as standard</span><span>Property with purpose</span>
+        <span>Considered</span><span>Design-led</span><span>Detail as standard</span><span>Property with purpose</span>
+      </div>
+    </div>
+
+    <section class="approach" id="approach">
+      <div class="container">
+        <div class="approach-head">
+          <span class="eyebrow" data-reveal>The Axton difference</span>
+          <h2 data-reveal class="d1">A softer approach.<br /><em>A sharper result.</em></h2>
+          <p data-reveal class="d2">
+            Property development has a reputation — fast, transactional, all margin and no soul.
+            We do it differently, and we think the numbers agree.
+          </p>
+        </div>
+        <div class="principles">
+          {principles.map((principle) => (
+            <div class={`principle${principle.delay ? ` ${principle.delay}` : ''}`} data-reveal>
+              <div class="pnum">{principle.num}</div>
+              <h3>{principle.title}</h3>
+              <p>{principle.text}</p>
+            </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="approach" class="approach">
-      <div class="container approach-grid">
-        <div class="approach-panel">
-          <span class="section-label">Our approach</span>
-          <h2>Refined. Responsive. Real.</h2>
-          <p>
-            We believe great property service should feel effortless — even when
-            the work behind it is anything but. That means proactive communication,
-            elegant problem-solving, and a standard of care that stands apart.
+    <section class="investors" id="investors">
+      <div class="container inv-grid">
+        <div class="inv-text">
+          <span class="eyebrow" data-reveal>For investors &amp; developers</span>
+          <h2 data-reveal class="d1">A different kind of property partner</h2>
+          <p data-reveal class="d2">
+            If you're looking to put capital into property and would rather work with someone
+            meticulous than someone loud, let's talk. Axton Living sources, transforms and
+            delivers homes that perform — and keeps you in the loop the whole way.
           </p>
+          <ul class="inv-list d2" data-reveal>
+            {investorPoints.map((point) => (
+              <li>
+                <Fragment set:html={checkIcon} />
+                {point}
+              </li>
+            ))}
+          </ul>
+          <a href="#contact" class="btn btn-primary">
+            Request the investor pack
+            <Fragment set:html={arrowIcon} />
+          </a>
         </div>
-        <ul class="value-list">
-          {values.map((value) => (
-            <li>{value}</li>
-          ))}
-        </ul>
+        <div class="inv-card d1" data-reveal>
+          <div class="ic-head">How partnership works</div>
+          <p class="ic-sub">Simple, transparent, and built around you.</p>
+          <ul class="inv-steps">
+            {partnerSteps.map((step) => (
+              <li>
+                <span class="s-n">{step.num}</span>
+                <span class="s-t">
+                  <b>{step.title}</b>
+                  <span>{step.text}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section id="contact" class="contact">
+    <section class="contact" id="contact">
       <div class="container contact-inner">
-        <div class="contact-copy">
-          <span class="section-label">Get in touch</span>
-          <h2>Let&apos;s talk about your property</h2>
-          <p>
-            Whether you&apos;re exploring options or ready to get started, we&apos;d love
-            to hear from you. Reach out and we&apos;ll respond personally.
-          </p>
+        <span class="eyebrow" data-reveal style="justify-content: center">Get in touch</span>
+        <h2 data-reveal class="d1">Let's create something<br /><em>worth coming home to.</em></h2>
+        <p data-reveal class="d2">
+          Whether you're an investor exploring options or a developer looking for a
+          considered partner, we'd love to hear from you. Every conversation starts personally.
+        </p>
+        <div class="contact-actions d2" data-reveal>
+          <a href="mailto:hello@axtonliving.co.uk" class="btn btn-primary">Start a conversation</a>
+          <a href="#projects" class="btn btn-secondary">Revisit the work</a>
         </div>
-        <div class="contact-card">
-          <p class="contact-label">Email</p>
+        <div>
           <a href="mailto:hello@axtonliving.co.uk" class="contact-email">hello@axtonliving.co.uk</a>
-          <p class="contact-note">
-            Full site launching soon. Domain and email are ready — website coming next.
-          </p>
-          <a href="mailto:hello@axtonliving.co.uk" class="btn btn-primary">Send an email</a>
         </div>
       </div>
     </section>
@@ -158,346 +316,79 @@ const values = [
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <img src="/axton-logo.png" alt="Axton Living" width="48" height="58" />
-      <p>&copy; {new Date().getFullYear()} Axton Living. All rights reserved.</p>
+      <a href="#top" class="brand">
+        <img src={logoImg.src} alt="Axton Living" class="brand-logo" width={logoImg.width} height={logoImg.height} loading="lazy" />
+      </a>
+      <p>&copy; {new Date().getFullYear()} Axton Living. Crafted with care.</p>
     </div>
   </footer>
 </Layout>
 
-<style>
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(12px);
-    background: rgba(255, 250, 249, 0.88);
-    border-bottom: 1px solid rgba(20, 70, 46, 0.08);
-  }
+<script>
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  .header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
-    gap: 1rem;
-  }
-
-  .brand img {
-    width: 56px;
-    height: auto;
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    font-size: 0.92rem;
-  }
-
-  .nav a {
-    color: var(--text-muted);
-    transition: color 0.2s ease;
-  }
-
-  .nav a:hover {
-    color: var(--green);
-  }
-
-  .nav-cta {
-    padding: 0.65rem 1.1rem;
-    border-radius: 999px;
-    background: var(--pink);
-    color: var(--green) !important;
-    font-weight: 500;
-  }
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-    padding: 4.5rem 0 5rem;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(circle at 85% 15%, rgba(251, 218, 222, 0.9), transparent 42%),
-      radial-gradient(circle at 10% 80%, rgba(251, 218, 222, 0.45), transparent 35%),
-      var(--cream);
-  }
-
-  .hero-grid {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .hero-copy h1 {
-    font-size: clamp(2.6rem, 5vw, 4.2rem);
-    color: var(--green);
-    max-width: 12ch;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-lead {
-    font-size: 1.08rem;
-    color: var(--text-muted);
-    max-width: 44ch;
-    margin-bottom: 2rem;
-  }
-
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .hero-card {
-    background: var(--white);
-    border: 1px solid rgba(20, 70, 46, 0.08);
-    border-radius: calc(var(--radius) + 0.5rem);
-    padding: 2.5rem 2rem;
-    box-shadow: var(--shadow);
-    text-align: center;
-  }
-
-  .hero-logo {
-    width: min(220px, 70%);
-    margin: 0 auto 1.5rem;
-  }
-
-  .hero-card-tag {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.75rem;
-  }
-
-  .hero-card-text {
-    color: var(--text-muted);
-    font-size: 0.98rem;
-  }
-
-  .about {
-    padding: 5rem 0;
-    background: var(--white);
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  .about-grid h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--green);
-  }
-
-  .about-copy {
-    display: grid;
-    gap: 1.25rem;
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-
-  .services {
-    padding: 5rem 0;
-    background: var(--pink);
-  }
-
-  .section-head {
-    max-width: 620px;
-    margin-bottom: 3rem;
-  }
-
-  .section-head h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--green);
-    margin-bottom: 1rem;
-  }
-
-  .section-head p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  .service-card {
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: var(--radius);
-    padding: 2rem;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-  }
-
-  .service-number {
-    display: inline-block;
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--green);
-    opacity: 0.45;
-    margin-bottom: 1rem;
-  }
-
-  .service-card h3 {
-    font-size: 1.65rem;
-    color: var(--green);
-    margin-bottom: 0.75rem;
-  }
-
-  .service-card p {
-    color: var(--text-muted);
-  }
-
-  .approach {
-    padding: 5rem 0;
-    background: var(--green);
-    color: var(--white);
-  }
-
-  .approach-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .approach-panel h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin: 0.5rem 0 1.25rem;
-  }
-
-  .approach-panel p,
-  .approach .section-label {
-    color: rgba(255, 255, 255, 0.82);
-  }
-
-  .approach .section-label {
-    color: var(--pink);
-  }
-
-  .value-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1rem;
-  }
-
-  .value-list li {
-    padding: 1.1rem 1.25rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    font-size: 1rem;
-  }
-
-  .contact {
-    padding: 5rem 0;
-    background: var(--cream);
-  }
-
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
-  }
-
-  .contact-copy h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--green);
-    margin: 0.5rem 0 1rem;
-  }
-
-  .contact-copy p {
-    color: var(--text-muted);
-    font-size: 1.05rem;
-  }
-
-  .contact-card {
-    background: var(--white);
-    border-radius: calc(var(--radius) + 0.25rem);
-    padding: 2.25rem;
-    box-shadow: var(--shadow);
-    border: 1px solid rgba(20, 70, 46, 0.08);
-  }
-
-  .contact-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--green);
-    margin-bottom: 0.5rem;
-  }
-
-  .contact-email {
-    display: block;
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    color: var(--green);
-    margin-bottom: 1rem;
-  }
-
-  .contact-note {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .site-footer {
-    padding: 2rem 0 2.5rem;
-    background: var(--white);
-    border-top: 1px solid rgba(20, 70, 46, 0.08);
-  }
-
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .footer-inner p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 900px) {
-    .hero-grid,
-    .about-grid,
-    .service-grid,
-    .approach-grid,
-    .contact-inner {
-      grid-template-columns: 1fr;
+    window.addEventListener('load', function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add('loaded');
+      });
+    });
+    if (document.readyState === 'complete') {
+      document.body.classList.add('loaded');
     }
 
-    .nav {
-      display: none;
+    const header = document.getElementById('header');
+    const onScroll = function () {
+      if (!header) return;
+      if (window.scrollY > 30) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+
+      if (!reduce) {
+        document.querySelectorAll('[data-parallax]').forEach(function (el) {
+          const s = parseFloat(el.getAttribute('data-parallax') || '0');
+          (el as HTMLElement).style.transform = 'translateY(' + window.scrollY * s + 'px)';
+        });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function animateCount(el: Element) {
+      const target = parseFloat(el.getAttribute('data-count') || '0');
+      const dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if (reduce) {
+        el.textContent = target.toFixed(dec);
+        return;
+      }
+      let start: number | null = null;
+      const dur = 1600;
+      function step(t: number) {
+        if (!start) start = t;
+        const p = Math.min((t - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toFixed(dec);
+      }
+      requestAnimationFrame(step);
     }
 
-    .hero {
-      padding-top: 2.5rem;
-    }
+    const io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            e.target.querySelectorAll('[data-count]').forEach(animateCount);
+            if (e.target.hasAttribute('data-count')) animateCount(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
 
-    .hero-copy h1 {
-      max-width: none;
-    }
-  }
-</style>
+    document.querySelectorAll('[data-reveal], .clip, .stat, .hero-float').forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+</script>
