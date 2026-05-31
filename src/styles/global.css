@@ -196,13 +196,13 @@ body::after {
 }
 
 .brand-logo {
-  height: 72px;
+  height: 56px;
   width: auto;
   transition: height 0.4s var(--ease);
 }
 
 .site-header.scrolled .brand-logo {
-  height: 56px;
+  height: 48px;
 }
 
 .nav {
@@ -447,10 +447,10 @@ body::after {
 
 .hero-mark {
   position: absolute;
-  top: -30px;
+  top: -24px;
   right: -14px;
-  width: 96px;
-  height: auto;
+  height: 72px;
+  width: auto;
   opacity: 0;
   transition: opacity 1s ease 1s;
 }
@@ -1058,7 +1058,7 @@ body::after {
 }
 
 .footer-inner .brand-logo {
-  height: 64px;
+  height: 48px;
 }
 
 .footer-inner p {
