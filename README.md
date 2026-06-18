@@ -55,3 +55,22 @@ Add these environment variables in **Vercel → Project → Settings → Environ
 | `FEEDBACK_TO_EMAIL` | Where feedback is delivered (defaults to `tony@4site.dev`) |
 
 See `.env.example` for reference.
+
+### Google Drive photo uploads
+
+Clients upload photos to a shared Google Drive folder linked from the feedback form.
+
+**Setup (one-time, in Google Drive):**
+
+1. Create a folder, e.g. `Axton Living — Website Photos`
+2. Right-click → **Share**
+3. Under **General access**, set **Anyone with the link** → **Editor** (so Catherine can upload without you adding her email)
+4. Copy the folder link (looks like `https://drive.google.com/drive/folders/xxxxxxxx`)
+
+**Add to Vercel:**
+
+| Variable | Description |
+|---|---|
+| `GOOGLE_DRIVE_FOLDER_URL` | The shared folder link from step 4 |
+
+Redeploy after adding. The feedback form will show an **Open Google Drive folder** button automatically.
