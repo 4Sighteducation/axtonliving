@@ -334,6 +334,55 @@
     letter-spacing: 0.04em;
   }
 
+  .draft-status {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 0.55rem 1rem;
+    border-radius: 999px;
+    background: var(--green);
+    color: var(--white);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(20, 70, 46, 0.2);
+  }
+
+  .draft-status.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .draft-restore {
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    border-radius: 0.75rem;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: #92600a;
+    display: none;
+  }
+
+  .draft-restore.visible {
+    display: block;
+  }
+
+  .draft-restore button {
+    margin-left: 12px;
+    background: none;
+    border: none;
+    color: var(--green);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: underline;
+  }
+
   .accent-bar {
     height: 6px;
     background: linear-gradient(90deg, var(--green) 0%, var(--pink-deep) 50%, var(--green) 100%);
@@ -392,6 +441,11 @@
       <div class="legend-item"><div class="legend-dot red"></div> Replace — remove or completely redo</div>
     </div>
     <p style="margin-top: 16px; font-size: 13px; color: #92600a;">Items with an <strong>amber left border</strong> and warning banner contain placeholder content that was not supplied by you and needs your confirmation. Please pay particular attention to these.</p>
+  </div>
+
+  <div class="draft-restore" id="draft-restore" role="status">
+    A saved draft was found from <span id="draft-date"></span>.
+    <button type="button" id="draft-clear">Discard draft</button>
   </div>
 
   <form id="feedback-form">
@@ -863,99 +917,181 @@
     <!-- SUBMIT -->
     <div class="submit-section">
       <button type="submit" class="btn-submit">Submit Feedback →</button>
-      <p class="submit-note">Your responses will be emailed to tony@4site.dev</p>
+      <p class="submit-note">Your responses will be sent directly to tony@4site.dev. Progress is auto-saved in your browser as you go.</p>
     </div>
 
   </form>
 </div>
 
+<div class="draft-status" id="draft-status" aria-live="polite">Draft saved</div>
+
 <div class="accent-bar"></div>
 
 <script>
-  document.getElementById('feedback-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var btn = this.querySelector('.btn-submit');
-    var origText = btn.textContent;
-    var submitNote = document.querySelector('.submit-note');
-    btn.textContent = 'Preparing...';
-    btn.disabled = true;
-    btn.style.opacity = '0.6';
+  (function () {
+    var STORAGE_KEY = 'axton-living-feedback-v1';
+    var form = document.getElementById('feedback-form');
+    var draftStatus = document.getElementById('draft-status');
+    var draftRestore = document.getElementById('draft-restore');
+    var draftDate = document.getElementById('draft-date');
+    var draftClear = document.getElementById('draft-clear');
+    var saveTimer = null;
+    var statusTimer = null;
 
-    var items = [];
-    document.querySelectorAll('.review-item').forEach(function(item) {
-      var ref = item.querySelector('.item-ref');
-      var label = item.querySelector('.item-label');
-      if (!ref || !label) return;
+    function collectFormState() {
+      var state = { radios: {}, textareas: {} };
 
-      var status = 'NOT SET';
-      item.querySelectorAll('input[type="radio"]').forEach(function(r) {
-        if (r.checked) status = r.value;
+      form.querySelectorAll('input[type="radio"]:checked').forEach(function (input) {
+        state.radios[input.name] = input.value;
       });
 
-      var notes = [];
-      item.querySelectorAll('textarea').forEach(function(t) {
-        if (t.value.trim()) notes.push(t.value.trim());
+      form.querySelectorAll('textarea').forEach(function (textarea) {
+        if (textarea.value) state.textareas[textarea.name] = textarea.value;
       });
 
-      items.push({
-        ref: ref.textContent,
-        label: label.textContent,
-        status: status,
-        notes: notes.join('\n---\n')
-      });
-    });
-
-    var generalNotes = (document.querySelector('textarea[name="general-notes"]') || {}).value || '';
-    var submittedAt = new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' });
-
-    var body = 'AXTON LIVING — WEBSITE FEEDBACK FORM\n';
-    body += 'Submitted: ' + submittedAt + '\n';
-    body += 'Client: Catherine Marie Axton / Axton Living Ltd\n';
-    body += '='.repeat(50) + '\n\n';
-
-    items.forEach(function(item) {
-      body += item.ref + ' — ' + item.label + '\n';
-      body += 'Status: ' + item.status.toUpperCase() + '\n';
-      if (item.notes) body += 'Notes:\n' + item.notes + '\n';
-      body += '\n' + '-'.repeat(40) + '\n\n';
-    });
-
-    if (generalNotes.trim()) {
-      body += 'GENERAL COMMENTS\n';
-      body += generalNotes.trim() + '\n';
+      return state;
     }
 
-    var subject = encodeURIComponent('Axton Living — Website Feedback (Review Round 1)');
-    var mailBody = encodeURIComponent(body);
-    var mailto = 'mailto:tony@4site.dev?subject=' + subject + '&body=' + mailBody;
+    function applyFormState(state) {
+      if (!state) return;
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(body).then(function() {
-        btn.textContent = 'FEEDBACK COPIED ✓';
+      Object.keys(state.radios || {}).forEach(function (name) {
+        var input = form.querySelector('input[type="radio"][name="' + name + '"][value="' + state.radios[name] + '"]');
+        if (input) input.checked = true;
+      });
+
+      Object.keys(state.textareas || {}).forEach(function (name) {
+        var textarea = form.querySelector('textarea[name="' + name + '"]');
+        if (textarea) textarea.value = state.textareas[name];
+      });
+    }
+
+    function saveDraft() {
+      var state = collectFormState();
+      var hasContent = Object.keys(state.radios).length > 0 || Object.keys(state.textareas).length > 0;
+      if (!hasContent) {
+        localStorage.removeItem(STORAGE_KEY);
+        return;
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        savedAt: new Date().toISOString(),
+        state: state
+      }));
+
+      draftStatus.classList.add('visible');
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(function () {
+        draftStatus.classList.remove('visible');
+      }, 2000);
+    }
+
+    function scheduleSave() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(saveDraft, 500);
+    }
+
+    function loadDraft() {
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+
+        var draft = JSON.parse(raw);
+        if (!draft || !draft.state) return;
+
+        applyFormState(draft.state);
+
+        if (draft.savedAt) {
+          draftDate.textContent = new Date(draft.savedAt).toLocaleString('en-GB', {
+            dateStyle: 'medium',
+            timeStyle: 'short'
+          });
+          draftRestore.classList.add('visible');
+        }
+      } catch (err) {
+        console.warn('Could not restore draft', err);
+      }
+    }
+
+    draftClear.addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      form.reset();
+      draftRestore.classList.remove('visible');
+    });
+
+    form.addEventListener('change', scheduleSave);
+    form.addEventListener('input', scheduleSave);
+
+    loadDraft();
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('.btn-submit');
+      var origText = btn.textContent;
+      var submitNote = document.querySelector('.submit-note');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+
+      var items = [];
+      document.querySelectorAll('.review-item').forEach(function (item) {
+        var ref = item.querySelector('.item-ref');
+        var label = item.querySelector('.item-label');
+        if (!ref || !label) return;
+
+        var status = 'NOT SET';
+        item.querySelectorAll('input[type="radio"]').forEach(function (r) {
+          if (r.checked) status = r.value;
+        });
+
+        var notes = [];
+        item.querySelectorAll('textarea').forEach(function (t) {
+          if (t.value.trim()) notes.push(t.value.trim());
+        });
+
+        items.push({
+          ref: ref.textContent,
+          label: label.textContent,
+          status: status,
+          notes: notes.join('\n---\n')
+        });
+      });
+
+      var generalNotes = (document.querySelector('textarea[name="general-notes"]') || {}).value || '';
+      var submittedAt = new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' });
+
+      var payload = {
+        items: items,
+        generalNotes: generalNotes,
+        submittedAt: submittedAt
+      };
+
+      fetch('/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function (res) {
+        if (!res.ok) throw new Error('Server error');
+        return res.json();
+      })
+      .then(function () {
+        localStorage.removeItem(STORAGE_KEY);
+        draftRestore.classList.remove('visible');
+        btn.textContent = 'FEEDBACK SENT ✓';
         btn.style.opacity = '1';
         btn.style.background = '#4ade80';
         btn.style.color = '#0e3221';
-        submitNote.textContent = 'Your feedback has been copied to the clipboard. Opening your email app now — please paste and send, or email tony@4site.dev directly.';
-        window.location.href = mailto;
-      }).catch(function() {
-        window.location.href = mailto;
-        btn.textContent = 'OPENING EMAIL...';
+        submitNote.textContent = 'Thank you — your feedback has been emailed to Tony. We\'ll be in touch shortly.';
+      })
+      .catch(function () {
+        btn.textContent = origText;
+        btn.disabled = false;
         btn.style.opacity = '1';
+        alert('There was a problem sending your feedback. Please try again, or email your comments directly to tony@4site.dev');
       });
-    } else {
-      window.location.href = mailto;
-      btn.textContent = 'OPENING EMAIL...';
-      btn.style.opacity = '1';
-      submitNote.textContent = 'Your email app should open with the feedback pre-filled. Please send to tony@4site.dev.';
-    }
-
-    setTimeout(function() {
-      btn.textContent = origText;
-      btn.disabled = false;
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 8000);
-  });
+    });
+  })();
 </script>
 
 </body>
