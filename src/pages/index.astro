@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PlaceholderImage from '../components/PlaceholderImage.astro';
 import BeforeAfterPlaceholder from '../components/BeforeAfterPlaceholder.astro';
+import GalleryLightbox from '../components/GalleryLightbox.astro';
 import RevealScript from '../components/RevealScript.astro';
 
 const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
@@ -101,20 +102,36 @@ const galleryItems = [
           <h2 data-reveal class="d1">Before &amp; after gallery</h2>
           <p data-reveal class="d2">
             [Placeholder] Your phone photos and before/after project images will replace these
-            placeholders. Each slot is sized for landscape before/after pairs.
+            placeholders. Click any image to preview the full-screen view.
           </p>
         </div>
         <div class="gallery-grid">
           {
             galleryItems.map((item, i) => (
               <div class:list={['gallery-item', i > 0 && 'd1']} data-reveal>
-                <BeforeAfterPlaceholder label={item.label} variant={item.variant} />
+                <button
+                  type="button"
+                  class="gallery-trigger"
+                  data-lightbox-trigger
+                  data-lightbox-label={item.label}
+                  aria-label={`Open ${item.label} full screen`}
+                >
+                  <BeforeAfterPlaceholder label={item.label} variant={item.variant} />
+                  <span class="gallery-zoom-hint">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"></path>
+                    </svg>
+                    Click to enlarge
+                  </span>
+                </button>
               </div>
             ))
           }
         </div>
       </div>
     </section>
+
+    <GalleryLightbox />
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">

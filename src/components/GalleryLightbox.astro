@@ -1,0 +1,70 @@
+<div id="gallery-lightbox" class="lightbox" hidden aria-hidden="true">
+  <div class="lightbox-backdrop" data-lightbox-close></div>
+  <div
+    class="lightbox-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lightbox-title"
+  >
+    <button type="button" class="lightbox-close" aria-label="Close full screen view" data-lightbox-close>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+    <p class="lightbox-eyebrow">Before &amp; after</p>
+    <h3 class="lightbox-title" id="lightbox-title"></h3>
+    <div class="lightbox-content"></div>
+    <p class="lightbox-note">Placeholder preview — your real photos will open full screen like this when clicked.</p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var lightbox = document.getElementById('gallery-lightbox');
+    if (!lightbox) return;
+
+    var dialog = lightbox.querySelector('.lightbox-dialog');
+    var content = lightbox.querySelector('.lightbox-content');
+    var title = lightbox.querySelector('.lightbox-title');
+    var closeBtn = lightbox.querySelector('.lightbox-close');
+    var lastFocus: Element | null = null;
+
+    function openLightbox(trigger: Element) {
+      var placeholder = trigger.querySelector('.ba-placeholder');
+      var label = trigger.getAttribute('data-lightbox-label') || 'Project';
+      if (!placeholder || !content || !title || !dialog) return;
+
+      lastFocus = document.activeElement;
+      content.innerHTML = '';
+      content.appendChild(placeholder.cloneNode(true));
+      title.textContent = label;
+
+      lightbox.hidden = false;
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+      closeBtn?.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      if (content) content.innerHTML = '';
+      if (lastFocus instanceof HTMLElement) lastFocus.focus();
+    }
+
+    document.querySelectorAll('[data-lightbox-trigger]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        openLightbox(trigger);
+      });
+    });
+
+    lightbox.querySelectorAll('[data-lightbox-close]').forEach(function (el) {
+      el.addEventListener('click', closeLightbox);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+    });
+  })();
+</script>
