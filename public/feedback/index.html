@@ -383,6 +383,26 @@
     text-decoration: underline;
   }
 
+  .photo-help {
+    background: rgba(20, 70, 46, 0.06);
+    border: 1px solid rgba(20, 70, 46, 0.14);
+    border-radius: 0.75rem;
+    padding: 18px 20px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .photo-help strong {
+    color: var(--green);
+  }
+
+  .photo-help a {
+    color: var(--green-light);
+    font-weight: 600;
+  }
+
   .accent-bar {
     height: 6px;
     background: linear-gradient(90deg, var(--green) 0%, var(--pink-deep) 50%, var(--green) 100%);
@@ -435,6 +455,7 @@
     <h3>How to complete this form</h3>
     <p>For each item, select one of the three status options and add any notes or corrections in the text box. If copy needs changing, please type the exact replacement text you'd like.</p>
     <p>Once complete, click "Submit Feedback" at the bottom. You can also print this form if you prefer to mark it up on paper.</p>
+    <p><strong>Photos:</strong> Please don't try to attach images in this form — email your photos separately to <a href="mailto:tony@4site.dev" style="color:var(--green-light);">tony@4site.dev</a>, or paste a Google Drive / iCloud / Dropbox link in the photo section below.</p>
     <div class="legend">
       <div class="legend-item"><div class="legend-dot green"></div> Approved — happy as-is</div>
       <div class="legend-item"><div class="legend-dot amber"></div> Amend — needs changes (describe below)</div>
@@ -646,6 +667,20 @@
         <div class="item-current">Are there any additional photos you'd like included? Professional headshots, team photos, property exteriors, completed project examples?</div>
         <label class="notes-label">Photos to supply</label>
         <textarea class="notes-field" name="img-04-notes" placeholder="List any additional photos you plan to provide and where you'd like them used"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Sending Your Photo Files</span>
+          <span class="item-ref">IMG-05</span>
+        </div>
+        <div class="photo-help">
+          <strong>Easiest option — email your photos directly:</strong><br>
+          Send your phone photos and before/after images to <a href="mailto:tony@4site.dev?subject=Axton%20Living%20—%20Website%20Photos">tony@4site.dev</a> with a short note saying which page each photo is for (e.g. "Hero image", "About page headshot", "Project 1 before/after").<br><br>
+          <strong>Alternative — share a link:</strong> Upload to Google Drive, iCloud, or Dropbox and paste the share link below.
+        </div>
+        <label class="notes-label">Photo share link (optional)</label>
+        <textarea class="notes-field" name="img-05-notes" placeholder="Paste your Google Drive, iCloud, or Dropbox link here"></textarea>
       </div>
     </div>
 
@@ -1039,6 +1074,9 @@
         var label = item.querySelector('.item-label');
         if (!ref || !label) return;
 
+        var sectionEl = item.closest('.review-section');
+        var sectionTitle = sectionEl ? sectionEl.querySelector('.section-title h2') : null;
+
         var status = 'NOT SET';
         item.querySelectorAll('input[type="radio"]').forEach(function (r) {
           if (r.checked) status = r.value;
@@ -1052,6 +1090,7 @@
         items.push({
           ref: ref.textContent,
           label: label.textContent,
+          section: sectionTitle ? sectionTitle.textContent.trim() : '',
           status: status,
           notes: notes.join('\n---\n')
         });
