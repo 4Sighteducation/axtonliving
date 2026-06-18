@@ -9,7 +9,7 @@ Built with [Astro](https://astro.build) and deployed on Vercel.
 - **Home** (`/`) — Hero, services preview, before/after gallery, social feeds placeholder, contact
 - **Our Story** (`/about`) — Founder story, values, call to action
 - **Services** (`/services`) — Service details, investor section, process steps
-- **Feedback form** (`/feedback.html`) — Client review form for Catherine to approve/amend/replace each element
+- **Feedback form** (`/feedback`) — Client review form for Catherine to approve/amend/replace each element
 
 ## Brand
 
@@ -39,7 +39,7 @@ Push to `main` on GitHub — Vercel auto-deploys from `4Sighteducation/axtonlivi
 
 ## Client feedback
 
-Share `/feedback.html` with the client to collect structured review feedback (Approve / Amend / Replace per element).
+Share `/feedback` with the client to collect structured review feedback (Approve / Amend / Replace per element).
 
 - **Auto-save** — progress is saved to the browser's local storage as the client fills in the form
 - **Email delivery** — submissions are sent automatically via SendGrid when the client clicks Submit
