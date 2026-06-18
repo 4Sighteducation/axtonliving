@@ -64,10 +64,13 @@ Clients upload photos to a shared Google Drive folder linked from the feedback f
 
 1. Create a folder, e.g. `Axton Living — Website Photos`
 2. Right-click → **Share**
-3. Under **General access**, set **Anyone with the link** → **Editor** (so Catherine can upload without you adding her email)
-4. Copy the folder link (looks like `https://drive.google.com/drive/folders/xxxxxxxx`)
+3. Click **Add people** and invite the client: `catherine.axton@gmail.com` as **Editor**
+4. Also set **General access** → **Anyone with the link** → **Editor** (optional, for backup access)
+5. Copy the folder link
 
-**Add to Vercel:**
+**Important:** Google Drive does not allow anonymous uploads. The client must sign in with a Google account (Gmail works) to add files — even with Editor access on the link.
+
+**Add to Vercel (optional — link is already in the codebase):**
 
 | Variable | Description |
 |---|---|
