@@ -1,0 +1,30 @@
+---
+import logoImg from '../assets/images/axton-logo.png';
+
+interface Props {
+  label?: string;
+  variant?: 'default' | 'pink';
+}
+
+const {
+  label = 'Project',
+  variant = 'default',
+} = Astro.props;
+---
+
+<div class:list={['ba-placeholder', variant === 'pink' && 'pink']} role="img" aria-label={`${label} — before and after`}>
+  <div class="ba-half before">
+    <span class="ba-tag">Before</span>
+    <div class="ba-mark">
+      <img src={logoImg.src} alt="" aria-hidden="true" loading="lazy" />
+    </div>
+  </div>
+  <div class="ba-divider" aria-hidden="true"></div>
+  <div class="ba-half after">
+    <span class="ba-tag">After</span>
+    <div class="ba-mark">
+      <img src={logoImg.src} alt="" aria-hidden="true" loading="lazy" />
+    </div>
+  </div>
+  <div class="ba-caption">{label}</div>
+</div>

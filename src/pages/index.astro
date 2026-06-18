@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PlaceholderImage from '../components/PlaceholderImage.astro';
+import BeforeAfterPlaceholder from '../components/BeforeAfterPlaceholder.astro';
 import RevealScript from '../components/RevealScript.astro';
 
 const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
@@ -105,9 +106,9 @@ const galleryItems = [
         </div>
         <div class="gallery-grid">
           {
-            galleryItems.map((item) => (
-              <div class="gallery-item clip">
-                <PlaceholderImage label={item.label} variant={item.variant} />
+            galleryItems.map((item, i) => (
+              <div class:list={['gallery-item', i > 0 && 'd1']} data-reveal>
+                <BeforeAfterPlaceholder label={item.label} variant={item.variant} />
               </div>
             ))
           }
