@@ -237,6 +237,14 @@ body::after {
   width: 100%;
 }
 
+.nav a.link.active {
+  color: var(--green);
+}
+
+.nav a.link.active::after {
+  width: 100%;
+}
+
 .nav-cta {
   padding: 0.6rem 1.25rem;
   border-radius: 999px;
@@ -538,6 +546,261 @@ body::after {
 
 .clip.in {
   clip-path: inset(0 0 0% 0);
+}
+
+/* ---------- PAGE HERO ---------- */
+.page-hero {
+  padding: 10rem 0 4rem;
+  background:
+    radial-gradient(100% 80% at 90% 0%, var(--pink) 0%, transparent 50%),
+    var(--cream);
+}
+
+.page-hero h1 {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  color: var(--green);
+  margin: 1rem 0 1.2rem;
+}
+
+.page-lead {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 58ch;
+  line-height: 1.65;
+}
+
+/* ---------- INTRO ---------- */
+.intro {
+  padding: 5rem 0;
+  background: var(--white);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.intro-text h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--green);
+  margin: 1rem 0 1.2rem;
+}
+
+.intro-text p {
+  color: var(--text-muted);
+  font-size: 1.06rem;
+  margin-bottom: 1.6rem;
+  max-width: 48ch;
+}
+
+.intro-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.intro-card {
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--radius);
+  background: var(--pink-wash);
+  border: 1px solid rgba(20, 70, 46, 0.08);
+}
+
+.intro-card h3 {
+  font-size: 1.35rem;
+  color: var(--green);
+  margin-bottom: 0.5rem;
+}
+
+.intro-card p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+/* ---------- GALLERY ---------- */
+.gallery {
+  padding: 6rem 0;
+  background: var(--cream);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.gallery-item {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow: var(--shadow);
+}
+
+.gallery-item .ph {
+  min-height: 100%;
+}
+
+/* ---------- SOCIAL ---------- */
+.social {
+  padding: 5rem 0;
+  background: var(--white);
+}
+
+.social-inner {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.social-inner h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--green);
+  margin: 1rem 0;
+}
+
+.social-inner p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.social-placeholder {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.social-tile {
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, var(--pink-wash), var(--pink));
+  border: 1px dashed rgba(20, 70, 46, 0.15);
+}
+
+.contact-note {
+  margin-top: 1.5rem;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.contact-note a {
+  color: var(--green);
+  border-bottom: 1px solid rgba(20, 70, 46, 0.2);
+}
+
+.contact-compact {
+  padding: 5rem 0;
+}
+
+/* ---------- APPROACH LIGHT ---------- */
+.approach-light {
+  padding: 6rem 0;
+  background: var(--pink-wash);
+  color: var(--text);
+}
+
+.approach-light .eyebrow {
+  color: var(--green);
+}
+
+.approach-light .eyebrow::before {
+  background: var(--green);
+}
+
+.approach-light .approach-head h2 {
+  color: var(--green);
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  margin: 1.2rem 0 1rem;
+}
+
+.approach-light .approach-head p {
+  color: var(--text-muted);
+}
+
+.principles-light {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.principles-light .principle {
+  background: var(--white);
+  border: 1px solid rgba(20, 70, 46, 0.08);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.principles-light .principle .pnum {
+  color: var(--green-light);
+}
+
+.principles-light .principle h3 {
+  color: var(--green);
+  font-size: 1.4rem;
+  margin: 0.6rem 0;
+}
+
+.principles-light .principle p {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+/* ---------- CTA BAND ---------- */
+.cta-band {
+  padding: 5rem 0;
+  background: var(--green);
+  color: var(--white);
+}
+
+.cta-band-inner {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.cta-band-inner h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: 1rem;
+}
+
+.cta-band-inner p {
+  color: rgba(255, 255, 255, 0.82);
+  margin-bottom: 2rem;
+}
+
+.cta-band-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-band .btn-secondary {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.cta-band .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- FOOTER NAV ---------- */
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+}
+
+.footer-nav a {
+  color: rgba(255, 255, 255, 0.65);
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: var(--pink);
 }
 
 /* ---------- STORY ---------- */
@@ -1054,11 +1317,18 @@ body::after {
 
   .hero-grid,
   .story-grid,
+  .intro-grid,
+  .gallery-grid,
+  .principles-light,
   .project,
   .project.flip .project-media,
   .approach .principles,
   .inv-grid {
     grid-template-columns: 1fr;
+  }
+
+  .social-placeholder {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .project.flip .project-media {

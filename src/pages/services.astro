@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import RevealScript from '../components/RevealScript.astro';
+
+const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14462e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+
+const services = [
+  {
+    idx: '01',
+    title: '[Placeholder service name]',
+    summary: 'Property sourcing',
+    text: '[Placeholder] Describe how you identify and assess investment opportunities — locations, criteria, and what investors can expect.',
+    tags: ['Tag placeholder', 'Tag placeholder', 'Tag placeholder'],
+    variant: 'default',
+  },
+  {
+    idx: '02',
+    title: '[Placeholder service name]',
+    summary: 'Renovation & design',
+    text: '[Placeholder] Explain your design-led approach to refurbishments, before/after transformations, and delivering homes that perform.',
+    tags: ['Tag placeholder', 'Tag placeholder', 'Tag placeholder'],
+    variant: 'flip pink',
+  },
+  {
+    idx: '03',
+    title: '[Placeholder service name]',
+    summary: 'Investor partnerships',
+    text: '[Placeholder] Outline partnership structures, communication, reporting, and how you work with investors from first conversation to return.',
+    tags: ['Tag placeholder', 'Tag placeholder', 'Tag placeholder'],
+    variant: 'default',
+  },
+];
+
+const processSteps = [
+  { num: '1', title: '[Step 1]', text: '[Placeholder] Initial conversation — understanding goals and appetite.' },
+  { num: '2', title: '[Step 2]', text: '[Placeholder] Opportunity presented with clear numbers and vision.' },
+  { num: '3', title: '[Step 3]', text: '[Placeholder] Project delivery managed end-to-end.' },
+  { num: '4', title: '[Step 4]', text: '[Placeholder] Exit, sale or let — with ongoing partnership in mind.' },
+];
+
+const includes = [
+  '[Placeholder] What is included in your core offering',
+  '[Placeholder] Geographic focus — North West & North East',
+  '[Placeholder] Type of investor or client you work with',
+  '[Placeholder] How enquiries and next steps work',
+];
+---
+
+<Layout
+  title="Services — Axton Living"
+  description="Property investment services from Axton Living Ltd — sourcing, renovation, and investor partnerships across the North West and North East."
+>
+  <Header current="services" />
+
+  <main id="top">
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow fade-stagger d1">What we do</span>
+        <h1 class="fade-stagger d2">Services</h1>
+        <p class="page-lead fade-stagger d3">
+          [Placeholder] An overview of how Axton Living helps property investors — from
+          sourcing and transformation to partnership and delivery.
+        </p>
+      </div>
+    </section>
+
+    <section class="projects">
+      <div class="container">
+        {
+          services.map((service) => (
+            <article class={`project${service.variant.includes('flip') ? ' flip' : ''}`}>
+              <div class="project-media">
+                <div class="clip">
+                  <PlaceholderImage
+                    label="Service image — before/after or project photo"
+                    variant={service.variant.includes('pink') ? 'pink' : 'default'}
+                  />
+                </div>
+              </div>
+              <div class="project-body">
+                <span class="idx" data-reveal>{service.idx}</span>
+                <h3 data-reveal class="d1">{service.title}</h3>
+                <div class="loc d1" data-reveal><b>{service.summary}</b></div>
+                <p data-reveal class="d2">{service.text}</p>
+                <div class="tags d2" data-reveal>
+                  {service.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="investors">
+      <div class="container inv-grid">
+        <div class="inv-text">
+          <span class="eyebrow" data-reveal>For investors</span>
+          <h2 data-reveal class="d1">[Placeholder investor heading]</h2>
+          <p data-reveal class="d2">
+            [Placeholder] Copy aimed at your target audience (30–70) — professional, warm,
+            and clear about how working with Axton Living feels different.
+          </p>
+          <ul class="inv-list d2" data-reveal>
+            {
+              includes.map((point) => (
+                <li>
+                  <Fragment set:html={checkIcon} />
+                  {point}
+                </li>
+              ))
+            }
+          </ul>
+          <a href="/#contact" class="btn btn-primary">
+            Request more information
+            <Fragment set:html={arrowIcon} />
+          </a>
+        </div>
+        <div class="inv-card d1" data-reveal>
+          <div class="ic-head">How it works</div>
+          <p class="ic-sub">[Placeholder] Simple steps from first contact to completed project.</p>
+          <ul class="inv-steps">
+            {
+              processSteps.map((step) => (
+                <li>
+                  <span class="s-n">{step.num}</span>
+                  <span class="s-t">
+                    <b>{step.title}</b>
+                    <span>{step.text}</span>
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact contact-compact">
+      <div class="container contact-inner">
+        <span class="eyebrow" data-reveal style="justify-content: center">Enquiries</span>
+        <h2 data-reveal class="d1">Let's talk about your<br /><em>next project.</em></h2>
+        <p data-reveal class="d2">
+          [Placeholder] Encourage visitors to get in touch — no obligation, personal response.
+        </p>
+        <div class="contact-actions d2" data-reveal>
+          <a href="mailto:catherine.axton@gmail.com" class="btn btn-primary">Email Catherine</a>
+          <a href="tel:07788438116" class="btn btn-secondary">07788 438116</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <RevealScript />
+</Layout>

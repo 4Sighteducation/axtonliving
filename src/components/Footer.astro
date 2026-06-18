@@ -1,0 +1,25 @@
+---
+import logoImg from '../assets/images/axton-logo.png';
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="/" class="brand">
+      <img
+        src={logoImg.src}
+        alt="Axton Living"
+        class="brand-logo"
+        width={logoImg.width}
+        height={logoImg.height}
+        loading="lazy"
+      />
+    </a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/about">Our Story</a>
+      <a href="/services">Services</a>
+      <a href="/feedback.html">Site feedback</a>
+    </nav>
+    <p>&copy; {new Date().getFullYear()} Axton Living Ltd. All rights reserved.</p>
+  </div>
+</footer>

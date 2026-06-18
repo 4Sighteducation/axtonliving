@@ -1,0 +1,22 @@
+---
+import logoImg from '../assets/images/axton-logo.png';
+
+interface Props {
+  label?: string;
+  variant?: 'default' | 'pink';
+  class?: string;
+}
+
+const {
+  label = 'Your photo here',
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class:list={['ph', variant === 'pink' && 'pink', className]} role="img" aria-label={label}>
+  <div class="ph-mark">
+    <img src={logoImg.src} alt="" aria-hidden="true" loading="lazy" />
+  </div>
+  <div class="ph-label">{label}</div>
+</div>

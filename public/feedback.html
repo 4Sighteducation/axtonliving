@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axton Living — Website Review Feedback Form</title>
+<link rel="icon" type="image/png" href="/axton-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #14462e;
+    --green-light: #1d5c3c;
+    --green-deep: #0e3221;
+    --pink: #fbdade;
+    --pink-deep: #f5c4cb;
+    --cream: #fffaf9;
+    --white: #ffffff;
+    --text: #2a2a2a;
+    --gray-100: #d8d8d8;
+    --gray-200: #8a8a8a;
+    --gray-300: #5c5c5c;
+    --border: rgba(20, 70, 46, 0.1);
+    --border-2: rgba(20, 70, 46, 0.2);
+    --green-status: #4ade80;
+    --amber: #fbbf24;
+    --red: #f87171;
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --body: 'Outfit', system-ui, sans-serif;
+    --mono: 'Outfit', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    line-height: 1.08;
+  }
+
+  .form-header {
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border-2);
+    margin-bottom: 48px;
+  }
+  .form-header .logo {
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 32px;
+  }
+  .form-header h1 {
+    font-size: clamp(36px, 5vw, 52px);
+    color: var(--green);
+    margin-bottom: 20px;
+  }
+  .form-header h1 .dot { color: var(--pink-deep); font-style: italic; }
+  .form-header p {
+    font-size: 17px;
+    color: var(--gray-300);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .form-header .meta {
+    margin-top: 24px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .form-header .meta span {
+    font-size: 11px;
+    color: var(--gray-200);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .form-header .meta span b {
+    color: var(--green);
+    font-weight: 600;
+    margin-right: 6px;
+  }
+
+  .instructions {
+    background: var(--white);
+    border: 1px solid var(--border-2);
+    border-radius: 1rem;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .instructions h3 {
+    font-size: 22px;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+  .instructions p {
+    font-size: 14px;
+    color: var(--gray-300);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .legend-dot.green { background: var(--green-status); }
+  .legend-dot.amber { background: var(--amber); }
+  .legend-dot.red { background: var(--red); }
+
+  .review-item.flagged {
+    border-left: 3px solid var(--amber);
+  }
+  .flag-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 0.5rem;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: #92600a;
+    line-height: 1.5;
+  }
+
+  .review-section {
+    margin-bottom: 48px;
+    border-top: 1px solid var(--border-2);
+    padding-top: 36px;
+  }
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .section-title .num {
+    font-size: 11px;
+    color: var(--pink-deep);
+    letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .section-title h2 {
+    font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--green);
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--gray-200);
+    margin-bottom: 28px;
+    max-width: 600px;
+  }
+
+  .review-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 24px 28px;
+    margin-bottom: 8px;
+    transition: border-color .2s;
+  }
+  .review-item:focus-within { border-color: var(--green-light); }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .item-label {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    color: var(--green);
+  }
+  .item-ref {
+    font-size: 10px;
+    color: var(--gray-200);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .item-current {
+    font-size: 14px;
+    color: var(--gray-300);
+    line-height: 1.55;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: var(--cream);
+    border-left: 2px solid var(--pink-deep);
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+  .item-current strong { color: var(--text); font-weight: 600; }
+
+  .status-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .status-option { position: relative; }
+  .status-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .status-option label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-2);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all .2s;
+    user-select: none;
+    background: var(--cream);
+  }
+  .status-option label .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .status-option input:checked + label {
+    border-color: var(--green);
+    background: rgba(20, 70, 46, 0.06);
+  }
+  .status-option.approve input:checked + label { border-color: var(--green-status); background: rgba(74, 222, 128, 0.1); }
+  .status-option.amend input:checked + label { border-color: var(--amber); background: rgba(251, 191, 36, 0.1); }
+  .status-option.replace input:checked + label { border-color: var(--red); background: rgba(248, 113, 113, 0.1); }
+
+  .notes-field {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 60px;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .notes-field:focus { border-color: var(--green-light); }
+  .notes-field::placeholder { color: var(--gray-200); }
+  .notes-label {
+    font-size: 10px;
+    color: var(--gray-200);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .general-section {
+    margin: 48px 0;
+    padding: 36px 0;
+    border-top: 1px solid var(--border-2);
+  }
+  .general-section h2 {
+    font-size: 32px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .general-section p {
+    font-size: 14px;
+    color: var(--gray-200);
+    margin-bottom: 20px;
+  }
+
+  .submit-section {
+    padding: 48px 0 80px;
+    border-top: 1px solid var(--border-2);
+    text-align: center;
+  }
+  .btn-submit {
+    background: var(--green);
+    color: var(--white);
+    padding: 18px 48px;
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    box-shadow: 0 14px 34px rgba(20, 70, 46, 0.2);
+  }
+  .btn-submit:hover { background: var(--green-light); transform: translateY(-2px); }
+  .submit-note {
+    margin-top: 16px;
+    font-size: 12px;
+    color: var(--gray-200);
+    letter-spacing: 0.04em;
+  }
+
+  .accent-bar {
+    height: 6px;
+    background: linear-gradient(90deg, var(--green) 0%, var(--pink-deep) 50%, var(--green) 100%);
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: var(--green-light);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  @media print {
+    body { background: white; font-size: 12px; }
+    .review-item { border: 1px solid #ccc; page-break-inside: avoid; }
+    .item-current { background: #f5f5f5; }
+    .accent-bar { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .item-header { flex-direction: column; gap: 4px; }
+    .legend { gap: 16px; }
+    .form-header .meta { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="accent-bar"></div>
+
+<div class="container">
+
+  <div class="form-header">
+    <a href="/" class="back-link">← Back to website preview</a>
+    <div class="logo">4site.dev — Axton Living Build Review</div>
+    <h1>Website Feedback<br>Form<span class="dot">.</span></h1>
+    <p>Please review each section of the website below. For every element, mark whether you're happy to approve, would like changes, or want it replaced entirely. Use the notes fields to describe any edits you'd like.</p>
+    <div class="meta">
+      <span><b>Client</b>Axton Living Ltd</span>
+      <span><b>Contact</b>Catherine Marie Axton</span>
+      <span><b>Build</b>v1.0 — Review Round 1</span>
+      <span><b>Date</b>June 2026</span>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h3>How to complete this form</h3>
+    <p>For each item, select one of the three status options and add any notes or corrections in the text box. If copy needs changing, please type the exact replacement text you'd like.</p>
+    <p>Once complete, click "Submit Feedback" at the bottom. You can also print this form if you prefer to mark it up on paper.</p>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot green"></div> Approved — happy as-is</div>
+      <div class="legend-item"><div class="legend-dot amber"></div> Amend — needs changes (describe below)</div>
+      <div class="legend-item"><div class="legend-dot red"></div> Replace — remove or completely redo</div>
+    </div>
+    <p style="margin-top: 16px; font-size: 13px; color: #92600a;">Items with an <strong>amber left border</strong> and warning banner contain placeholder content that was not supplied by you and needs your confirmation. Please pay particular attention to these.</p>
+  </div>
+
+  <form id="feedback-form">
+
+    <!-- § 01 BRAND -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 01</span>
+        <h2>Brand &amp; General</h2>
+      </div>
+      <p class="section-desc">Overall look, feel, logo, and colour scheme.</p>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Logo</span>
+          <span class="item-ref">BRAND-01</span>
+        </div>
+        <div class="item-current">The Axton Living logo is used in the header and footer. Does it display correctly? Is this the right version to use, or do you need a new logo designed?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="brand-01" id="brand-01-a" value="approve"><label for="brand-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="brand-01" id="brand-01-b" value="amend"><label for="brand-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="brand-01" id="brand-01-c" value="replace"><label for="brand-01-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / changes required</label>
+        <textarea class="notes-field" name="brand-01-notes" placeholder="e.g. Need a new logo designed, make it larger, use a different variant, etc."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Colour Scheme</span>
+          <span class="item-ref">BRAND-02</span>
+        </div>
+        <div class="item-current">Light cream background with <strong>green (#14462e)</strong> and <strong>pink (#fbdade)</strong> accents — as specified in your discovery form. Does this feel right for Axton Living?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="brand-02" id="brand-02-a" value="approve"><label for="brand-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="brand-02" id="brand-02-b" value="amend"><label for="brand-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="brand-02" id="brand-02-c" value="replace"><label for="brand-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / changes required</label>
+        <textarea class="notes-field" name="brand-02-notes" placeholder="e.g. More pink, darker green, softer palette, etc."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Overall Style &amp; Layout</span>
+          <span class="item-ref">BRAND-03</span>
+        </div>
+        <div class="item-current">Clean &amp; minimal, warm &amp; welcoming direction with serif headings (Cormorant Garamond), soft animations, and rounded image frames. Inspired by Abi Hookway — professional, personable, exciting. Does this feel authentic to your brand?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="brand-03" id="brand-03-a" value="approve"><label for="brand-03-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="brand-03" id="brand-03-b" value="amend"><label for="brand-03-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="brand-03" id="brand-03-c" value="replace"><label for="brand-03-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / changes required</label>
+        <textarea class="notes-field" name="brand-03-notes" placeholder="e.g. Prefer more clinical/professional, less animation, different font feel, etc."></textarea>
+      </div>
+    </div>
+
+    <!-- § 02 HOME -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 02</span>
+        <h2>Home Page</h2>
+      </div>
+      <p class="section-desc">The first thing visitors see — headline, intro text, and hero image.</p>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Main Headline</span>
+          <span class="item-ref">HOME-01</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — The headline currently reads "[Placeholder headline] for the North West &amp; North East." Please provide your preferred headline.</span>
+        </div>
+        <div class="item-current"><strong>"[Placeholder headline] for the North West &amp; North East."</strong></div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="home-01" id="home-01-a" value="approve"><label for="home-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="home-01" id="home-01-b" value="amend"><label for="home-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="home-01" id="home-01-c" value="replace"><label for="home-01-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / replacement headline</label>
+        <textarea class="notes-field" name="home-01-notes" placeholder="Type your preferred headline here"></textarea>
+      </div>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Intro / Sub-Heading Text</span>
+          <span class="item-ref">HOME-02</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — This intro paragraph was written by us as sample text. Please provide your own wording or mark amendments below.</span>
+        </div>
+        <div class="item-current">"[Placeholder intro copy] Axton Living Ltd creates a professional presence in the property investment market — helping investors and developers turn overlooked properties into homes people want to live in."</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="home-02" id="home-02-a" value="approve"><label for="home-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="home-02" id="home-02-b" value="amend"><label for="home-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="home-02" id="home-02-c" value="replace"><label for="home-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / replacement text</label>
+        <textarea class="notes-field" name="home-02-notes" placeholder="Type the exact replacement text you'd like"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Hero Image</span>
+          <span class="item-ref">HOME-03</span>
+        </div>
+        <div class="item-current">Currently showing a <strong>placeholder</strong> where your hero photo will go. You mentioned having phone photos — please describe or supply the image you'd like here (e.g. a professional headshot, property photo, or project shot).</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="home-03" id="home-03-a" value="approve"><label for="home-03-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="home-03" id="home-03-b" value="amend"><label for="home-03-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="home-03" id="home-03-c" value="replace"><label for="home-03-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / preferred image</label>
+        <textarea class="notes-field" name="home-03-notes" placeholder="Describe the photo you'd like, or note that you'll supply one separately"></textarea>
+      </div>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Services Preview Cards (3 cards)</span>
+          <span class="item-ref">HOME-04</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — Service names and descriptions on the home page are placeholders. Please confirm or replace.</span>
+        </div>
+        <div class="item-current">Currently showing: <strong>Property sourcing</strong>, <strong>Renovation &amp; refurbishment</strong>, and <strong>Investor partnerships</strong> — each with placeholder description text.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="home-04" id="home-04-a" value="approve"><label for="home-04-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="home-04" id="home-04-b" value="amend"><label for="home-04-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="home-04" id="home-04-c" value="replace"><label for="home-04-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / corrections</label>
+        <textarea class="notes-field" name="home-04-notes" placeholder="List correct service names and brief descriptions for each card"></textarea>
+      </div>
+    </div>
+
+    <!-- § 03 PHOTOGRAPHY -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 03</span>
+        <h2>Photography &amp; Images</h2>
+      </div>
+      <p class="section-desc">All image placeholders across the site. Please confirm what photos to supply.</p>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Before &amp; After Gallery (4 slots)</span>
+          <span class="item-ref">IMG-01</span>
+        </div>
+        <div class="item-current">The home page gallery has <strong>4 placeholder slots</strong> for before/after project photographs. You mentioned having before/after photos — please describe which projects to feature.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="img-01" id="img-01-a" value="approve"><label for="img-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="img-01" id="img-01-b" value="amend"><label for="img-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="img-01" id="img-01-c" value="replace"><label for="img-01-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes — projects to feature</label>
+        <textarea class="notes-field" name="img-01-notes" placeholder="e.g. Project 1: 3-bed terrace in Manchester — before/after kitchen and living room. Project 2: ..."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">About Page Photos (2 slots)</span>
+          <span class="item-ref">IMG-02</span>
+        </div>
+        <div class="item-current">The About page has placeholders for a <strong>founder photo</strong> and a <strong>supporting image</strong>. What would you like in each slot?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="img-02" id="img-02-a" value="approve"><label for="img-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="img-02" id="img-02-b" value="amend"><label for="img-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="img-02" id="img-02-c" value="replace"><label for="img-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / photo descriptions</label>
+        <textarea class="notes-field" name="img-02-notes" placeholder="e.g. Main photo: professional headshot. Second photo: on-site at a renovation project"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Service Page Images (3 slots)</span>
+          <span class="item-ref">IMG-03</span>
+        </div>
+        <div class="item-current">Each service on the Services page has an image placeholder. Please describe what photo suits each service, or supply them separately.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="img-03" id="img-03-a" value="approve"><label for="img-03-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="img-03" id="img-03-b" value="amend"><label for="img-03-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="img-03" id="img-03-c" value="replace"><label for="img-03-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / image assignments</label>
+        <textarea class="notes-field" name="img-03-notes" placeholder="Describe which photo goes with which service"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Additional Photos Needed</span>
+          <span class="item-ref">IMG-04</span>
+        </div>
+        <div class="item-current">Are there any additional photos you'd like included? Professional headshots, team photos, property exteriors, completed project examples?</div>
+        <label class="notes-label">Photos to supply</label>
+        <textarea class="notes-field" name="img-04-notes" placeholder="List any additional photos you plan to provide and where you'd like them used"></textarea>
+      </div>
+    </div>
+
+    <!-- § 04 ABOUT -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 04</span>
+        <h2>About / Our Story</h2>
+      </div>
+      <p class="section-desc">Your personal story, company background, and values.</p>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Story Copy (all paragraphs)</span>
+          <span class="item-ref">ABT-01</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — The entire About page story is placeholder text written by us. Please provide your own story or mark specific amendments.</span>
+        </div>
+        <div class="item-current">Includes placeholder headings, pull quote, two body paragraphs about how Axton Living started, and a signature block for <strong>Catherine Marie Axton, Founder</strong>.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="abt-01" id="abt-01-a" value="approve"><label for="abt-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="abt-01" id="abt-01-b" value="amend"><label for="abt-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="abt-01" id="abt-01-c" value="replace"><label for="abt-01-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / your story</label>
+        <textarea class="notes-field" name="abt-01-notes" placeholder="Please provide your story — how you got into property investment, your background, what drives you, etc." style="min-height: 120px;"></textarea>
+      </div>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Values Section (3 cards)</span>
+          <span class="item-ref">ABT-02</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — Three value/principle cards with placeholder titles and descriptions. Please confirm or replace.</span>
+        </div>
+        <div class="item-current">Three cards labelled <strong>[Placeholder value]</strong> with placeholder description text each.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="abt-02" id="abt-02-a" value="approve"><label for="abt-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="abt-02" id="abt-02-b" value="amend"><label for="abt-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="abt-02" id="abt-02-c" value="replace"><label for="abt-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / your values</label>
+        <textarea class="notes-field" name="abt-02-notes" placeholder="List 3 values/principles with a title and short description for each"></textarea>
+      </div>
+    </div>
+
+    <!-- § 05 SERVICES -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 05</span>
+        <h2>Services</h2>
+      </div>
+      <p class="section-desc">Service names, descriptions, investor section, and process steps.</p>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Service Names &amp; Descriptions</span>
+          <span class="item-ref">SVC-01</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — All three service sections use placeholder names, descriptions, and tags. Please provide your actual services.</span>
+        </div>
+        <div class="item-current">
+          Currently showing three services with placeholder titles, summaries (Property sourcing / Renovation &amp; design / Investor partnerships), descriptions, and tag placeholders.<br><br>
+          What services do you actually offer? Are any missing or incorrectly named?
+        </div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="svc-01" id="svc-01-a" value="approve"><label for="svc-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="svc-01" id="svc-01-b" value="amend"><label for="svc-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="svc-01" id="svc-01-c" value="replace"><label for="svc-01-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / your services</label>
+        <textarea class="notes-field" name="svc-01-notes" placeholder="List each service with name, description, and any tags/keywords" style="min-height: 120px;"></textarea>
+      </div>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">"How It Works" Process (4 steps)</span>
+          <span class="item-ref">SVC-02</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>NEEDS CONFIRMATION — This 4-step process was created by us as a suggested structure. Please confirm whether it reflects how you actually work.</span>
+        </div>
+        <div class="item-current"><strong>1</strong> [Step 1] Initial conversation → <strong>2</strong> [Step 2] Opportunity presented → <strong>3</strong> [Step 3] Project delivery → <strong>4</strong> [Step 4] Exit / return. Does this match your process?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="svc-02" id="svc-02-a" value="approve"><label for="svc-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="svc-02" id="svc-02-b" value="amend"><label for="svc-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="svc-02" id="svc-02-c" value="replace"><label for="svc-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / your process</label>
+        <textarea class="notes-field" name="svc-02-notes" placeholder="Describe your actual process step by step"></textarea>
+      </div>
+
+      <div class="review-item flagged">
+        <div class="item-header">
+          <span class="item-label">Investor Section Copy</span>
+          <span class="item-ref">SVC-03</span>
+        </div>
+        <div class="flag-banner">
+          <span>⚠</span>
+          <span>PLACEHOLDER COPY — Investor-facing copy and bullet points are placeholders written by us.</span>
+        </div>
+        <div class="item-current">Section aimed at investors (target audience 30–70) with placeholder heading, intro, and 4 bullet points about what's included.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="svc-03" id="svc-03-a" value="approve"><label for="svc-03-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="svc-03" id="svc-03-b" value="amend"><label for="svc-03-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="svc-03" id="svc-03-c" value="replace"><label for="svc-03-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / corrections</label>
+        <textarea class="notes-field" name="svc-03-notes" placeholder="Provide investor-facing copy or list corrections"></textarea>
+      </div>
+    </div>
+
+    <!-- § 06 SOCIAL -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 06</span>
+        <h2>Social Media &amp; Gallery</h2>
+      </div>
+      <p class="section-desc">Social feeds and image gallery features.</p>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Social Media Feeds</span>
+          <span class="item-ref">SOC-01</span>
+        </div>
+        <div class="item-current">A placeholder section for <strong>Instagram and Facebook feeds</strong> is included on the home page. Which social accounts should be connected?</div>
+        <label class="notes-label">Social media URLs</label>
+        <textarea class="notes-field" name="soc-01-notes" placeholder="Instagram: https://instagram.com/...&#10;Facebook: https://facebook.com/...&#10;LinkedIn: ..."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Scrolling Marquee Text</span>
+          <span class="item-ref">SOC-02</span>
+        </div>
+        <div class="item-current">Currently scrolling: <strong>Property investment / North West / North East / Design-led</strong>. Would you like different words?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="soc-02" id="soc-02-a" value="approve"><label for="soc-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="soc-02" id="soc-02-b" value="amend"><label for="soc-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+          <div class="status-option replace"><input type="radio" name="soc-02" id="soc-02-c" value="replace"><label for="soc-02-c"><div class="dot" style="background:var(--red)"></div> Replace</label></div>
+        </div>
+        <label class="notes-label">Notes / preferred words</label>
+        <textarea class="notes-field" name="soc-02-notes" placeholder="e.g. Replace with: Considered / Partnership / Quality / etc."></textarea>
+      </div>
+    </div>
+
+    <!-- § 07 CONTACT -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 07</span>
+        <h2>Contact &amp; Details</h2>
+      </div>
+      <p class="section-desc">Phone, email, domain, and business details.</p>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Phone Number</span>
+          <span class="item-ref">CTT-01</span>
+        </div>
+        <div class="item-current"><strong>07788 438116</strong> — displayed on contact sections with a click-to-call link.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="ctt-01" id="ctt-01-a" value="approve"><label for="ctt-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="ctt-01" id="ctt-01-b" value="amend"><label for="ctt-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+        </div>
+        <label class="notes-label">Notes</label>
+        <textarea class="notes-field" name="ctt-01-notes" placeholder="e.g. Use a different number, add a landline, etc."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Email Address</span>
+          <span class="item-ref">CTT-02</span>
+        </div>
+        <div class="item-current"><strong>catherine.axton@gmail.com</strong> — used as the primary contact email throughout the site.</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="ctt-02" id="ctt-02-a" value="approve"><label for="ctt-02-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="ctt-02" id="ctt-02-b" value="amend"><label for="ctt-02-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+        </div>
+        <label class="notes-label">Notes</label>
+        <textarea class="notes-field" name="ctt-02-notes" placeholder="e.g. Change to hello@axtonliving.com once set up"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Domain Name</span>
+          <span class="item-ref">CTT-03</span>
+        </div>
+        <div class="item-current">You own <strong>axtonliving.com</strong>. We will connect this domain once the site is approved. Is this still correct?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="ctt-03" id="ctt-03-a" value="approve"><label for="ctt-03-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="ctt-03" id="ctt-03-b" value="amend"><label for="ctt-03-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+        </div>
+        <label class="notes-label">Notes</label>
+        <textarea class="notes-field" name="ctt-03-notes" placeholder="Confirm domain or note any changes"></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Business Address</span>
+          <span class="item-ref">CTT-04</span>
+        </div>
+        <div class="item-current"><strong>Not yet included</strong> — please provide your registered or operational address if you'd like it on the site.</div>
+        <label class="notes-label">Please provide your address</label>
+        <textarea class="notes-field" name="ctt-04-notes" placeholder="Full business address (or note if you'd prefer not to include one)"></textarea>
+      </div>
+    </div>
+
+    <!-- § 08 SEO -->
+    <div class="review-section">
+      <div class="section-title">
+        <span class="num">§ 08</span>
+        <h2>SEO &amp; Visibility</h2>
+      </div>
+      <p class="section-desc">Search keywords, target locations, and how you'd like to be found online.</p>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Target Locations</span>
+          <span class="item-ref">SEO-01</span>
+        </div>
+        <div class="item-current">Currently targeting <strong>North West</strong> and <strong>North East</strong> England for property investment. Are there specific cities or regions to emphasise?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="seo-01" id="seo-01-a" value="approve"><label for="seo-01-a"><div class="dot" style="background:var(--green-status)"></div> Approve</label></div>
+          <div class="status-option amend"><input type="radio" name="seo-01" id="seo-01-b" value="amend"><label for="seo-01-b"><div class="dot" style="background:var(--amber)"></div> Amend</label></div>
+        </div>
+        <label class="notes-label">Notes / specific locations</label>
+        <textarea class="notes-field" name="seo-01-notes" placeholder="e.g. Manchester, Cheshire, Newcastle, Liverpool, etc."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Keywords &amp; Search Terms</span>
+          <span class="item-ref">SEO-02</span>
+        </div>
+        <div class="item-current">Primary keyword from your brief: <strong>Property investment</strong>. Are there other terms you'd like to rank for?</div>
+        <label class="notes-label">Additional keywords</label>
+        <textarea class="notes-field" name="seo-02-notes" placeholder="e.g. property developer North West, buy to let investment, property refurbishment, etc."></textarea>
+      </div>
+
+      <div class="review-item">
+        <div class="item-header">
+          <span class="item-label">Google Analytics</span>
+          <span class="item-ref">SEO-03</span>
+        </div>
+        <div class="item-current">You noted you're <strong>not sure about Google Analytics</strong>. Would you like us to set this up so you can see how many people visit your site?</div>
+        <div class="status-group">
+          <div class="status-option approve"><input type="radio" name="seo-03" id="seo-03-a" value="approve"><label for="seo-03-a"><div class="dot" style="background:var(--green-status)"></div> Yes, set it up</label></div>
+          <div class="status-option amend"><input type="radio" name="seo-03" id="seo-03-b" value="amend"><label for="seo-03-b"><div class="dot" style="background:var(--amber)"></div> Not yet</label></div>
+        </div>
+        <label class="notes-label">Notes</label>
+        <textarea class="notes-field" name="seo-03-notes" placeholder="Any questions about analytics or tracking"></textarea>
+      </div>
+    </div>
+
+    <!-- GENERAL -->
+    <div class="general-section">
+      <h2>General Comments<span style="color:var(--pink-deep); font-style: italic;">.</span></h2>
+      <p>Anything else not covered above — overall impressions, things you love, things you'd change, content still to supply, questions for us.</p>
+      <textarea class="notes-field" name="general-notes" placeholder="Type any additional feedback, questions, or comments here..." style="min-height: 160px;"></textarea>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-section">
+      <button type="submit" class="btn-submit">Submit Feedback →</button>
+      <p class="submit-note">Your responses will be emailed to tony@4site.dev</p>
+    </div>
+
+  </form>
+</div>
+
+<div class="accent-bar"></div>
+
+<script>
+  document.getElementById('feedback-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = this.querySelector('.btn-submit');
+    var origText = btn.textContent;
+    var submitNote = document.querySelector('.submit-note');
+    btn.textContent = 'Preparing...';
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    var items = [];
+    document.querySelectorAll('.review-item').forEach(function(item) {
+      var ref = item.querySelector('.item-ref');
+      var label = item.querySelector('.item-label');
+      if (!ref || !label) return;
+
+      var status = 'NOT SET';
+      item.querySelectorAll('input[type="radio"]').forEach(function(r) {
+        if (r.checked) status = r.value;
+      });
+
+      var notes = [];
+      item.querySelectorAll('textarea').forEach(function(t) {
+        if (t.value.trim()) notes.push(t.value.trim());
+      });
+
+      items.push({
+        ref: ref.textContent,
+        label: label.textContent,
+        status: status,
+        notes: notes.join('\n---\n')
+      });
+    });
+
+    var generalNotes = (document.querySelector('textarea[name="general-notes"]') || {}).value || '';
+    var submittedAt = new Date().toLocaleString('en-GB', { dateStyle: 'full', timeStyle: 'short' });
+
+    var body = 'AXTON LIVING — WEBSITE FEEDBACK FORM\n';
+    body += 'Submitted: ' + submittedAt + '\n';
+    body += 'Client: Catherine Marie Axton / Axton Living Ltd\n';
+    body += '='.repeat(50) + '\n\n';
+
+    items.forEach(function(item) {
+      body += item.ref + ' — ' + item.label + '\n';
+      body += 'Status: ' + item.status.toUpperCase() + '\n';
+      if (item.notes) body += 'Notes:\n' + item.notes + '\n';
+      body += '\n' + '-'.repeat(40) + '\n\n';
+    });
+
+    if (generalNotes.trim()) {
+      body += 'GENERAL COMMENTS\n';
+      body += generalNotes.trim() + '\n';
+    }
+
+    var subject = encodeURIComponent('Axton Living — Website Feedback (Review Round 1)');
+    var mailBody = encodeURIComponent(body);
+    var mailto = 'mailto:tony@4site.dev?subject=' + subject + '&body=' + mailBody;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(body).then(function() {
+        btn.textContent = 'FEEDBACK COPIED ✓';
+        btn.style.opacity = '1';
+        btn.style.background = '#4ade80';
+        btn.style.color = '#0e3221';
+        submitNote.textContent = 'Your feedback has been copied to the clipboard. Opening your email app now — please paste and send, or email tony@4site.dev directly.';
+        window.location.href = mailto;
+      }).catch(function() {
+        window.location.href = mailto;
+        btn.textContent = 'OPENING EMAIL...';
+        btn.style.opacity = '1';
+      });
+    } else {
+      window.location.href = mailto;
+      btn.textContent = 'OPENING EMAIL...';
+      btn.style.opacity = '1';
+      submitNote.textContent = 'Your email app should open with the feedback pre-filled. Please send to tony@4site.dev.';
+    }
+
+    setTimeout(function() {
+      btn.textContent = origText;
+      btn.disabled = false;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 8000);
+  });
+</script>
+
+</body>
+</html>

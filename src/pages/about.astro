@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import RevealScript from '../components/RevealScript.astro';
+
+const values = [
+  {
+    num: '01',
+    title: '[Placeholder value]',
+    text: '[Placeholder] A short paragraph describing one of the principles that guide how Axton Living works with investors and properties.',
+  },
+  {
+    num: '02',
+    title: '[Placeholder value]',
+    text: '[Placeholder] A short paragraph on approach, communication, or the kind of partner Catherine wants to be in the market.',
+    delay: 'd1',
+  },
+  {
+    num: '03',
+    title: '[Placeholder value]',
+    text: '[Placeholder] A short paragraph on quality, design, or the detail that sets Axton Living apart from typical developers.',
+    delay: 'd1',
+  },
+];
+---
+
+<Layout
+  title="Our Story — Axton Living"
+  description="Learn about Axton Living Ltd — a property investment business serving the North West and North East with a considered, design-led approach."
+>
+  <Header current="about" />
+
+  <main id="top">
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow fade-stagger d1">About us</span>
+        <h1 class="fade-stagger d2">Our story</h1>
+        <p class="page-lead fade-stagger d3">
+          [Placeholder] A warm introduction to Catherine and Axton Living Ltd — who you are,
+          why property investment, and what makes your approach different.
+        </p>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="container story-grid">
+        <div class="story-visual">
+          <div class="frame">
+            <PlaceholderImage label="Founder photo — your photo here" />
+          </div>
+          <div class="frame two">
+            <PlaceholderImage label="Supporting image" variant="pink" />
+          </div>
+        </div>
+        <div class="story-text">
+          <span class="eyebrow" data-reveal>The beginning</span>
+          <h2 data-reveal class="d1">[Placeholder story heading]</h2>
+          <p class="lede" data-reveal>
+            [Placeholder pull quote or opening line that captures Catherine's voice and journey.]
+          </p>
+          <p data-reveal class="d1">
+            [Placeholder paragraph 1] Sample text about how Axton Living started, the
+            experience behind the business, and the path into property investment. Catherine
+            will replace this with her own story.
+          </p>
+          <p data-reveal class="d2">
+            [Placeholder paragraph 2] More detail on values, the North West and North East
+            focus, and the kind of clients and partners you work best with.
+          </p>
+          <p class="signature" data-reveal>
+            Catherine Marie Axton
+            <small>Founder, Axton Living Ltd</small>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="approach approach-light">
+      <div class="container">
+        <div class="approach-head">
+          <span class="eyebrow" data-reveal>What we stand for</span>
+          <h2 data-reveal class="d1">[Placeholder values heading]</h2>
+          <p data-reveal class="d2">
+            [Placeholder] A brief intro to the principles that shape every project and
+            partnership.
+          </p>
+        </div>
+        <div class="principles principles-light">
+          {
+            values.map((value) => (
+              <div class:list={['principle', value.delay]} data-reveal>
+                <div class="pnum">{value.num}</div>
+                <h3>{value.title}</h3>
+                <p>{value.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container cta-band-inner">
+        <h2 data-reveal>[Placeholder call to action]</h2>
+        <p data-reveal class="d1">
+          [Placeholder] Invite visitors to explore your services or get in touch for an
+          initial conversation.
+        </p>
+        <div class="cta-band-actions d1" data-reveal>
+          <a href="/services" class="btn btn-primary">View services</a>
+          <a href="/#contact" class="btn btn-secondary">Contact us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <RevealScript />
+</Layout>

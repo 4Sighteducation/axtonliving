@@ -1,0 +1,63 @@
+<script>
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.addEventListener('load', function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add('loaded');
+      });
+    });
+    if (document.readyState === 'complete') {
+      document.body.classList.add('loaded');
+    }
+
+    if (!reduce) {
+      const onScroll = function () {
+        document.querySelectorAll('[data-parallax]').forEach(function (el) {
+          const s = parseFloat(el.getAttribute('data-parallax') || '0');
+          (el as HTMLElement).style.transform = 'translateY(' + window.scrollY * s + 'px)';
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    }
+
+    function animateCount(el: Element) {
+      const target = parseFloat(el.getAttribute('data-count') || '0');
+      const dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+      if (reduce) {
+        el.textContent = target.toFixed(dec);
+        return;
+      }
+      let start: number | null = null;
+      const dur = 1600;
+      function step(t: number) {
+        if (!start) start = t;
+        const p = Math.min((t - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (target * eased).toFixed(dec);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toFixed(dec);
+      }
+      requestAnimationFrame(step);
+    }
+
+    const io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            e.target.querySelectorAll('[data-count]').forEach(animateCount);
+            if (e.target.hasAttribute('data-count')) animateCount(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    document.querySelectorAll('[data-reveal], .clip, .stat, .hero-float, .gallery-item').forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+</script>

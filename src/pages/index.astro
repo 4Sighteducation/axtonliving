@@ -1,98 +1,40 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import logoImg from '../assets/images/axton-logo.png';
-import catherinePortrait from '../assets/images/catherine-portrait.jpeg';
-import catherineOffice from '../assets/images/catherine-office.jpeg';
-
-const projects = [
-  {
-    idx: '01',
-    title: 'The Garden House',
-    location: 'Cheshire',
-    type: 'Full renovation',
-    text: 'A dated three-bed reworked around light and flow — walls opened to the garden, a kitchen that became the heart of the home. Reimagined for how families actually live.',
-    tags: ['Structural reconfiguration', 'Interior design', 'Landscaping'],
-    variant: 'default',
-  },
-  {
-    idx: '02',
-    title: 'The Old Terrace',
-    location: 'Manchester',
-    type: 'Period refurbishment',
-    text: 'Original features rescued and celebrated, paired with a calm, contemporary palette. Proof that character and modern comfort aren\'t a trade-off.',
-    tags: ['Heritage detailing', 'Loft conversion', 'Energy upgrade'],
-    variant: 'flip pink',
-  },
-  {
-    idx: '03',
-    title: 'The Coach House',
-    location: 'Cheshire',
-    type: 'Conversion',
-    text: 'An unloved outbuilding turned into a light-filled home, designed to feel considered in every corner — and to command its market when finished.',
-    tags: ['Change of use', 'Bespoke joinery', 'Turnkey finish'],
-    variant: 'default',
-  },
-];
-
-const principles = [
-  {
-    num: '01',
-    title: 'Design-led, always',
-    text: 'We start with how a home should feel, not just what it should cost. Good design is what makes a property desirable — and desirable property sells and lets, faster.',
-  },
-  {
-    num: '02',
-    title: 'Considered, not cut-throat',
-    text: 'Calm, clear communication and relationships that last beyond a single deal. No bluster, no games — just dependable people doing careful work.',
-    delay: 'd1',
-  },
-  {
-    num: '03',
-    title: 'Detail as standard',
-    text: 'The things others skip are the things we obsess over. It\'s where lasting quality lives, and where real value quietly compounds.',
-    delay: 'd1',
-  },
-  {
-    num: '04',
-    title: 'Partnership over transaction',
-    text: 'Investors aren\'t a wallet to us. You get transparency, a shared plan, and a partner who treats your capital with the same care as the property.',
-    delay: 'd2',
-  },
-];
-
-const investorPoints = [
-  'Sourcing with an eye for under-valued potential',
-  'Design and project delivery managed end-to-end',
-  'Clear reporting and honest, jargon-free numbers',
-  'Flexible structures — JV, funding, or full delivery',
-];
-
-const partnerSteps = [
-  { num: '1', title: 'Conversation', text: 'We learn your goals, appetite and timescales — no pressure, no pitch.' },
-  { num: '2', title: 'Opportunity', text: 'We bring you sourced projects with the numbers and the vision laid out plainly.' },
-  { num: '3', title: 'Transformation', text: 'We manage the work, the trades and the timeline. You see steady progress.' },
-  { num: '4', title: 'Return', text: 'Sale or let, your way — with a partner you\'ll want to work with again.' },
-];
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PlaceholderImage from '../components/PlaceholderImage.astro';
+import RevealScript from '../components/RevealScript.astro';
 
 const arrowIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
-const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#14462e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+
+const servicesPreview = [
+  {
+    title: 'Property sourcing',
+    text: '[Placeholder] Brief description of how Axton Living identifies investment opportunities across the North West and North East.',
+  },
+  {
+    title: 'Renovation & refurbishment',
+    text: '[Placeholder] Brief description of design-led property transformation — from tired stock to desirable homes.',
+  },
+  {
+    title: 'Investor partnerships',
+    text: '[Placeholder] Brief description of how investors can work with Axton Living on joint ventures and funded projects.',
+  },
+];
+
+const galleryItems = [
+  { label: 'Before & after — Project 01', variant: 'default' as const },
+  { label: 'Before & after — Project 02', variant: 'pink' as const },
+  { label: 'Before & after — Project 03', variant: 'default' as const },
+  { label: 'Before & after — Project 04', variant: 'pink' as const },
+];
 ---
 
-<Layout>
-  <header class="site-header" id="header">
-    <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="Axton Living home">
-        <img src={logoImg.src} alt="Axton Living" class="brand-logo" width={logoImg.width} height={logoImg.height} fetchpriority="high" />
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a class="link" href="#story">Story</a>
-        <a class="link" href="#projects">Projects</a>
-        <a class="link" href="#approach">Approach</a>
-        <a class="link" href="#investors">Invest</a>
-        <a class="nav-cta" href="#contact">Get in touch</a>
-      </nav>
-    </div>
-  </header>
+<Layout
+  title="Axton Living — Property Investment in the North West & North East"
+  description="Axton Living Ltd helps property investors create value through considered, design-led development. Generate enquiries and build your presence in the property investment market."
+>
+  <Header current="home" />
 
   <main id="top">
     <section class="hero">
@@ -101,195 +43,98 @@ const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" s
       <div class="hero-blob b2" data-parallax="-0.12" aria-hidden="true"></div>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="eyebrow fade-stagger d1">Property with purpose</span>
+          <span class="eyebrow fade-stagger d1">Property investment</span>
           <h1>
-            <span class="reveal-line"><span>Beautiful homes</span></span>
-            <span class="reveal-line"><span>that quietly <em>outperform.</em></span></span>
+            <span class="reveal-line"><span>[Placeholder headline]</span></span>
+            <span class="reveal-line"><span>for the <em>North West</em> &amp; North East.</span></span>
           </h1>
           <p class="hero-lead fade-stagger d2">
-            Axton Living transforms overlooked properties into homes people genuinely
-            want to live in — design-led, considered, and refreshingly human. A
-            different kind of development partner for investors who care how value is made.
+            [Placeholder intro copy] Axton Living Ltd creates a professional presence in the
+            property investment market — helping investors and developers turn overlooked
+            properties into homes people want to live in.
           </p>
           <div class="hero-actions fade-stagger d3">
-            <a href="#investors" class="btn btn-primary">
-              Partner with us
+            <a href="#contact" class="btn btn-primary">
+              Get in touch
               <Fragment set:html={arrowIcon} />
             </a>
-            <a href="#projects" class="btn btn-secondary">See the work</a>
+            <a href="/services" class="btn btn-secondary">View services</a>
           </div>
         </div>
         <div class="hero-visual">
           <div class="hero-frame">
-            <img src={catherineOffice.src} alt="Catherine in a modern property development office" class="photo-fill" width={catherineOffice.width} height={catherineOffice.height} fetchpriority="high" />
-          </div>
-          <div class="hero-float">
-            <span class="num" data-count="11">0</span>
-            <span class="lbl">Homes brought back to life</span>
+            <PlaceholderImage label="Hero image — your photo here" />
           </div>
         </div>
       </div>
     </section>
 
-    <section class="story" id="story">
-      <div class="container story-grid">
-        <div class="story-visual">
-          <div class="frame">
-            <img src={catherinePortrait.src} alt="Catherine, founder of Axton Living" class="photo-fill" width={catherinePortrait.width} height={catherinePortrait.height} loading="lazy" />
-          </div>
-          <div class="frame two">
-            <img src={catherineOffice.src} alt="Property development workspace" class="photo-fill" width={catherineOffice.width} height={catherineOffice.height} loading="lazy" />
-          </div>
-        </div>
-        <div class="story-text">
-          <span class="eyebrow" data-reveal>The story</span>
-          <h2 data-reveal class="d1">Before Axton Living<br />had a name.</h2>
-          <p class="lede" data-reveal>
-            There were the projects — homes bought tired and overlooked, then patiently
-            reimagined into places worth coming home to.
-          </p>
-          <p data-reveal class="d1">
-            For years, Catherine renovated property the only way that felt right: slowly,
-            carefully, and with a designer's eye for the details most developers skip.
-            What began as personal projects became a quiet portfolio — and a reputation
-            for turning out homes that people fall for, and that hold their value.
-          </p>
+    <section class="intro">
+      <div class="container intro-grid">
+        <div class="intro-text">
+          <span class="eyebrow" data-reveal>Welcome</span>
+          <h2 data-reveal class="d1">[Placeholder section heading]</h2>
           <p data-reveal class="d2">
-            Axton Living is the next chapter: the same instinct, now offered as a
-            partnership. The craft of a personal project, with the structure of a business.
+            [Placeholder body copy] This is sample text to show layout and tone. Catherine
+            will review and replace this with her own words during the feedback stage.
           </p>
-          <p class="signature" data-reveal>
-            Catherine
-            <small>Founder, Axton Living</small>
-          </p>
+          <a href="/about" class="btn btn-secondary d2" data-reveal>Read our story</a>
+        </div>
+        <div class="intro-cards">
+          {
+            servicesPreview.map((item, i) => (
+              <article class:list={['intro-card', i > 0 && 'd1']} data-reveal>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))
+          }
         </div>
       </div>
     </section>
 
-    <section class="stats">
-      <div class="container stats-grid">
-        <div class="stat" data-reveal>
-          <div class="figure"><span data-count="11">0</span></div>
-          <div class="cap">Homes transformed</div>
-        </div>
-        <div class="stat d1" data-reveal>
-          <div class="figure"><span data-count="9">0</span><span class="suffix">yrs</span></div>
-          <div class="cap">Hands-on experience</div>
-        </div>
-        <div class="stat" data-reveal>
-          <div class="figure">£<span data-count="2.4" data-decimals="1">0</span><span class="suffix">m</span></div>
-          <div class="cap">Value created</div>
-        </div>
-        <div class="stat d1" data-reveal>
-          <div class="figure"><span data-count="28">0</span><span class="suffix">%</span></div>
-          <div class="cap">Avg. value uplift</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="projects" id="projects">
+    <section class="gallery" id="gallery">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow" data-reveal>Selected work</span>
-          <h2 data-reveal class="d1">A portfolio with a point of view</h2>
+          <span class="eyebrow" data-reveal>Portfolio</span>
+          <h2 data-reveal class="d1">Before &amp; after gallery</h2>
           <p data-reveal class="d2">
-            Every Axton project starts with the same question: how should it feel to
-            live here? These are a few of the homes that answer it.
+            [Placeholder] Your phone photos and before/after project images will replace these
+            placeholders. Each slot is sized for landscape before/after pairs.
           </p>
         </div>
-
-        {projects.map((project) => (
-          <article class={`project${project.variant.includes('flip') ? ' flip' : ''}`}>
-            <div class="project-media">
-              <div class={`ph clip${project.variant.includes('pink') ? ' pink' : ''}`}>
-                <div class="ph-mark">
-                  <img src={logoImg.src} alt="" aria-hidden="true" loading="lazy" />
-                </div>
-                <div class="ph-label">Before &amp; after gallery</div>
+        <div class="gallery-grid">
+          {
+            galleryItems.map((item) => (
+              <div class="gallery-item clip">
+                <PlaceholderImage label={item.label} variant={item.variant} />
               </div>
-            </div>
-            <div class="project-body">
-              <span class="idx" data-reveal>{project.idx}</span>
-              <h3 data-reveal class="d1">{project.title}</h3>
-              <div class="loc d1" data-reveal><b>{project.location}</b> · {project.type}</div>
-              <p data-reveal class="d2">{project.text}</p>
-              <div class="tags d2" data-reveal>
-                {project.tags.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-            </div>
-          </article>
-        ))}
+            ))
+          }
+        </div>
       </div>
     </section>
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Considered</span><span>Design-led</span><span>Detail as standard</span><span>Property with purpose</span>
-        <span>Considered</span><span>Design-led</span><span>Detail as standard</span><span>Property with purpose</span>
+        <span>Property investment</span><span>North West</span><span>North East</span><span>Design-led</span>
+        <span>Property investment</span><span>North West</span><span>North East</span><span>Design-led</span>
       </div>
     </div>
 
-    <section class="approach" id="approach">
-      <div class="container">
-        <div class="approach-head">
-          <span class="eyebrow" data-reveal>The Axton difference</span>
-          <h2 data-reveal class="d1">A softer approach.<br /><em>A sharper result.</em></h2>
-          <p data-reveal class="d2">
-            Property development has a reputation — fast, transactional, all margin and no soul.
-            We do it differently, and we think the numbers agree.
-          </p>
-        </div>
-        <div class="principles">
-          {principles.map((principle) => (
-            <div class={`principle${principle.delay ? ` ${principle.delay}` : ''}`} data-reveal>
-              <div class="pnum">{principle.num}</div>
-              <h3>{principle.title}</h3>
-              <p>{principle.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="investors" id="investors">
-      <div class="container inv-grid">
-        <div class="inv-text">
-          <span class="eyebrow" data-reveal>For investors &amp; developers</span>
-          <h2 data-reveal class="d1">A different kind of property partner</h2>
-          <p data-reveal class="d2">
-            If you're looking to put capital into property and would rather work with someone
-            meticulous than someone loud, let's talk. Axton Living sources, transforms and
-            delivers homes that perform — and keeps you in the loop the whole way.
-          </p>
-          <ul class="inv-list d2" data-reveal>
-            {investorPoints.map((point) => (
-              <li>
-                <Fragment set:html={checkIcon} />
-                {point}
-              </li>
-            ))}
-          </ul>
-          <a href="#contact" class="btn btn-primary">
-            Request the investor pack
-            <Fragment set:html={arrowIcon} />
-          </a>
-        </div>
-        <div class="inv-card d1" data-reveal>
-          <div class="ic-head">How partnership works</div>
-          <p class="ic-sub">Simple, transparent, and built around you.</p>
-          <ul class="inv-steps">
-            {partnerSteps.map((step) => (
-              <li>
-                <span class="s-n">{step.num}</span>
-                <span class="s-t">
-                  <b>{step.title}</b>
-                  <span>{step.text}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
+    <section class="social">
+      <div class="container social-inner">
+        <span class="eyebrow" data-reveal>Connect</span>
+        <h2 data-reveal class="d1">Social media feeds</h2>
+        <p data-reveal class="d2">
+          [Placeholder] Instagram and Facebook feeds will appear here once connected. This
+          section keeps the site feeling active and personable.
+        </p>
+        <div class="social-placeholder d2" data-reveal aria-hidden="true">
+          <div class="social-tile"></div>
+          <div class="social-tile"></div>
+          <div class="social-tile"></div>
+          <div class="social-tile"></div>
         </div>
       </div>
     </section>
@@ -297,97 +142,26 @@ const checkIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" s
     <section class="contact" id="contact">
       <div class="container contact-inner">
         <span class="eyebrow" data-reveal style="justify-content: center">Get in touch</span>
-        <h2 data-reveal class="d1">Let's create something<br /><em>worth coming home to.</em></h2>
+        <h2 data-reveal class="d1">Ready to start a<br /><em>conversation?</em></h2>
         <p data-reveal class="d2">
-          Whether you're an investor exploring options or a developer looking for a
-          considered partner, we'd love to hear from you. Every conversation starts personally.
+          [Placeholder] Whether you are an investor exploring opportunities or looking for a
+          considered property partner in the North West or North East, we would love to hear
+          from you.
         </p>
         <div class="contact-actions d2" data-reveal>
-          <a href="mailto:hello@axtonliving.co.uk" class="btn btn-primary">Start a conversation</a>
-          <a href="#projects" class="btn btn-secondary">Revisit the work</a>
+          <a href="mailto:catherine.axton@gmail.com" class="btn btn-primary">Email Catherine</a>
+          <a href="tel:07788438116" class="btn btn-secondary">Call 07788 438116</a>
         </div>
         <div>
-          <a href="mailto:hello@axtonliving.co.uk" class="contact-email">hello@axtonliving.co.uk</a>
+          <a href="mailto:catherine.axton@gmail.com" class="contact-email">catherine.axton@gmail.com</a>
         </div>
+        <p class="contact-note d2" data-reveal>
+          <a href="/feedback.html">Complete the site feedback form</a> to help us refine this draft.
+        </p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <a href="#top" class="brand">
-        <img src={logoImg.src} alt="Axton Living" class="brand-logo" width={logoImg.width} height={logoImg.height} loading="lazy" />
-      </a>
-      <p>&copy; {new Date().getFullYear()} Axton Living. Crafted with care.</p>
-    </div>
-  </footer>
+  <Footer />
+  <RevealScript />
 </Layout>
-
-<script>
-  (function () {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    window.addEventListener('load', function () {
-      requestAnimationFrame(function () {
-        document.body.classList.add('loaded');
-      });
-    });
-    if (document.readyState === 'complete') {
-      document.body.classList.add('loaded');
-    }
-
-    const header = document.getElementById('header');
-    const onScroll = function () {
-      if (!header) return;
-      if (window.scrollY > 30) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
-
-      if (!reduce) {
-        document.querySelectorAll('[data-parallax]').forEach(function (el) {
-          const s = parseFloat(el.getAttribute('data-parallax') || '0');
-          (el as HTMLElement).style.transform = 'translateY(' + window.scrollY * s + 'px)';
-        });
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    function animateCount(el: Element) {
-      const target = parseFloat(el.getAttribute('data-count') || '0');
-      const dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
-      if (reduce) {
-        el.textContent = target.toFixed(dec);
-        return;
-      }
-      let start: number | null = null;
-      const dur = 1600;
-      function step(t: number) {
-        if (!start) start = t;
-        const p = Math.min((t - start) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = (target * eased).toFixed(dec);
-        if (p < 1) requestAnimationFrame(step);
-        else el.textContent = target.toFixed(dec);
-      }
-      requestAnimationFrame(step);
-    }
-
-    const io = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('in');
-            e.target.querySelectorAll('[data-count]').forEach(animateCount);
-            if (e.target.hasAttribute('data-count')) animateCount(e.target);
-            io.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    document.querySelectorAll('[data-reveal], .clip, .stat, .hero-float').forEach(function (el) {
-      io.observe(el);
-    });
-  })();
-</script>
