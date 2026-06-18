@@ -485,7 +485,7 @@
     <h3>How to complete this form</h3>
     <p>For each item, select one of the three status options and add any notes or corrections in the text box. If copy needs changing, please type the exact replacement text you'd like.</p>
     <p>Once complete, click "Submit Feedback" at the bottom. You can also print this form if you prefer to mark it up on paper.</p>
-    <p><strong>Photos:</strong> Please don't try to attach images in this form — email your photos separately to <a href="mailto:tony@4site.dev" style="color:var(--green-light);">tony@4site.dev</a>, or paste a Google Drive / iCloud / Dropbox link in the photo section below.</p>
+    <p><strong>Photos:</strong> Upload your images to our shared Google Drive folder (link in the Photography section below). Add a short note in the form saying which photo goes where.</p>
     <div class="legend">
       <div class="legend-item"><div class="legend-dot green"></div> Approved — happy as-is</div>
       <div class="legend-item"><div class="legend-dot amber"></div> Amend — needs changes (describe below)</div>
@@ -704,13 +704,15 @@
           <span class="item-label">Sending Your Photo Files</span>
           <span class="item-ref">IMG-05</span>
         </div>
-        <div class="photo-help">
-          <strong>Easiest option — email your photos directly:</strong><br>
-          Send your phone photos and before/after images to <a href="mailto:tony@4site.dev?subject=Axton%20Living%20—%20Website%20Photos">tony@4site.dev</a> with a short note saying which page each photo is for (e.g. "Hero image", "About page headshot", "Project 1 before/after").<br><br>
-          <strong>Alternative — share a link:</strong> Upload to Google Drive, iCloud, or Dropbox and paste the share link below.
+        <div class="photo-help" id="photo-help">
+          <strong>Upload your photos here:</strong><br>
+          Use the button below to open our shared Google Drive folder. Upload your phone photos and before/after images, then add a note below saying which page each photo is for (e.g. "Hero image", "About page headshot", "Project 1 before/after").
+          <br>
+          <a id="drive-folder-link" class="drive-btn hidden" href="#" target="_blank" rel="noopener noreferrer">Open Google Drive folder →</a>
+          <p id="drive-folder-pending" class="drive-pending">Loading upload folder…</p>
         </div>
-        <label class="notes-label">Photo share link (optional)</label>
-        <textarea class="notes-field" name="img-05-notes" placeholder="Paste your Google Drive, iCloud, or Dropbox link here"></textarea>
+        <label class="notes-label">Notes about your photos (optional)</label>
+        <textarea class="notes-field" name="img-05-notes" placeholder="e.g. hero-headshot.jpg is for the home page, project1-before.jpg and project1-after.jpg are for the gallery"></textarea>
       </div>
     </div>
 
@@ -993,6 +995,30 @@
 <div class="accent-bar"></div>
 
 <script>
+  (function () {
+    var driveLink = document.getElementById('drive-folder-link');
+    var drivePending = document.getElementById('drive-folder-pending');
+
+    var DRIVE_FOLDER_URL = 'https://drive.google.com/drive/folders/1Aty9tVMprF39wyVWIFxzEEO-qPsC0ucQ?usp=sharing';
+
+    function showDriveLink(url) {
+      driveLink.href = url;
+      driveLink.classList.remove('hidden');
+      drivePending.classList.add('hidden');
+    }
+
+    showDriveLink(DRIVE_FOLDER_URL);
+
+    fetch('/api/public-config')
+      .then(function (res) { return res.json(); })
+      .then(function (config) {
+        if (config.googleDriveFolderUrl) showDriveLink(config.googleDriveFolderUrl);
+      })
+      .catch(function () {
+        /* fallback URL above already shown */
+      });
+  })();
+
   (function () {
     var STORAGE_KEY = 'axton-living-feedback-v1';
     var form = document.getElementById('feedback-form');
